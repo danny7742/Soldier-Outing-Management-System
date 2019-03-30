@@ -21,6 +21,7 @@
         <activity android:name="VacationmngActivity"></activity>
         <activity android:name="ReportformActivity"></activity>
         <activity android:name="PopupActivity"></activity>
+        <activity android:name=".ReportMessageActivity"></activity>
 
     </application>
 
