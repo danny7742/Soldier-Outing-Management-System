@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,6 +22,12 @@ public class MainActivity extends AppCompatActivity
 
     ImageView stateimage;
     int state = 1;
+    String startYear;
+    String startMonth;
+    String startDay;
+    String endYear;
+    String endMonth;
+    String endDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +42,22 @@ public class MainActivity extends AppCompatActivity
         Button vcabutton = (Button) findViewById(R.id.vacbutton);
 
 
+        Intent intent = getIntent();
+        if(intent.getStringExtra("vacplan")!=null) {
+            String vacplanresult = intent.getStringExtra("vacplan");
 
-        switch (state) {  // 병사의 상태에 따라 레이아웃이 바뀜
+            String[] datas = vacplanresult.split("_");
+            startYear = datas[0];
+            startMonth = datas[1];
+            startDay = datas[2];
+            endYear = datas[3];
+            endMonth = datas[4];
+            endDay = datas[5];
+            Log.d(startYear, "mingtest");
+        }
+
+
+            switch (state) {  // 병사의 상태에 따라 레이아웃이 바뀜
             case 0: stateimage.setImageResource(R.drawable.yellowheart);
                 reportbutton.setVisibility(View.GONE);
                 break;
