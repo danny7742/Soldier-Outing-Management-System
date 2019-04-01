@@ -1,12 +1,13 @@
 package com.example.minsookang.soms;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
 
-public class PopupActivity extends AppCompatActivity {
+public class PopupActivity extends Activity {
     //각종 팝업 관련 Activity 구현 예정
 
     TextView txtText;

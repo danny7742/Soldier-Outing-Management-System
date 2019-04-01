@@ -93,6 +93,26 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+
+
+
+    public void vacbutton(View v){
+        Intent intent = new Intent(this, PopupActivity.class);
+        intent.putExtra("data", "Test Popup");
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==1){
+            if(resultCode==RESULT_OK){
+                //데이터 받기
+                String result = data.getStringExtra("result");
+            }
+        }
+    }
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
