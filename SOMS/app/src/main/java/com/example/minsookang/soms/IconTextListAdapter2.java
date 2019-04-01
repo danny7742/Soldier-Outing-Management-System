@@ -16,30 +16,30 @@ import java.util.List;
  */
 
 public class IconTextListAdapter2 extends BaseAdapter {
-    private Context mContext;
-    private List<IconTextItem> mItems = new ArrayList<IconTextItem>();
+    private Context mContext2;
+    private List<IconTextItem2> mItems2 = new ArrayList<IconTextItem2>();
 
     public IconTextListAdapter2(Context mContext) {
-        this.mContext = mContext;
+        this.mContext2 = mContext;
     }
 
 
-    public void addItem(IconTextItem it){
-        mItems.add(it);
+    public void addItem(IconTextItem2 it){
+        mItems2.add(it);
     }
 
-    public void setmItems(List<IconTextItem> mItems) {
-        this.mItems = mItems;
+    public void setmItems(List<IconTextItem2> mItems) {
+        this.mItems2 = mItems;
     }
 
     @Override
     public int getCount() {
-        return mItems.size();
+        return mItems2.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mItems.get(position);
+        return mItems2.get(position);
     }
 
     public boolean areAllltemsSelectable(){
@@ -48,7 +48,7 @@ public class IconTextListAdapter2 extends BaseAdapter {
 
     public boolean isSelectable(int position){
         try {
-            return mItems.get(position).isSelectable();
+            return mItems2.get(position).isSelectable();
         } catch (IndexOutOfBoundsException ex){
             return false;
         }
@@ -66,12 +66,12 @@ public class IconTextListAdapter2 extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         IconTextView2 itemView;
         if (convertView == null){
-            itemView = new IconTextView2(mContext, mItems.get(position));
+            itemView = new IconTextView2(mContext2, mItems2.get(position));
         } else {
             itemView = (IconTextView2)convertView;
-            itemView.setIcon(mItems.get(position).getIcon());
-            itemView.setText(0, mItems.get(position).getData(0));
-            itemView.setText(1, mItems.get(position).getData(1));
+            itemView.setIcon(mItems2.get(position).getIcon());
+            itemView.setText(0, mItems2.get(position).getData(0));
+            itemView.setText(1, mItems2.get(position).getData(1));
         }
         return itemView;
 

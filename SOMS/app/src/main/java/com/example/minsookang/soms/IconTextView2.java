@@ -19,12 +19,12 @@ import android.widget.TextView;
 
 public class IconTextView2 extends LinearLayout {
 
-    private ImageView mIcon;
-    private TextView mText01;
-    private TextView mText02;
+    private ImageView mIcon2;
+    private TextView mText03;
+    private TextView mText04;
 
 
-    public IconTextView2(Context context, IconTextItem aItem) {
+    public IconTextView2(Context context, IconTextItem2 aItem) {
         super(context);
 
         //보일 해당 listView에 들어갈 디자인 레이아웃 xml 설정(만들어진 listitem.xml을 보일 디자인 레이아웃으로 설정하였음)
@@ -33,14 +33,14 @@ public class IconTextView2 extends LinearLayout {
         inflater.inflate(R.layout.list_item2, this, true);
 
         //각 변수를 설정하고 그 변수가 어떤 값을 의미하는지 또, 무엇을 읽어오고 보여주는지를 설정
-        mIcon = (ImageView) findViewById(R.id.iconItem);
-        mIcon.setImageDrawable(aItem.getIcon());
+        mIcon2 = (ImageView) findViewById(R.id.iconItem2);
+        mIcon2.setImageDrawable(aItem.getIcon());
 
-        mText01 = (TextView) findViewById(R.id.dataItem01);
-        mText01.setText(aItem.getData(0));
+        mText03 = (TextView) findViewById(R.id.dataItem03);
+        mText03.setText(aItem.getData(0));
 
-        mText02 = (TextView) findViewById(R.id.dataItem02);
-        mText02.setText(aItem.getData(1));
+        mText04 = (TextView) findViewById(R.id.dataItem04);
+        mText04.setText(aItem.getData(1));
 
 
     }
@@ -49,16 +49,16 @@ public class IconTextView2 extends LinearLayout {
     //파라메타로 Adapter 자바에서 설정된 int형 index 값과 String형 데이터 값을 가져와서 위처럼 변수를 자동으로 설정해줌
     public void setText(int index, String data){
         if (index == 0 ){
-            mText01.setText(data);
+            mText03.setText(data);
         } else if (index == 1){
-            mText02.setText(data);
+            mText04.setText(data);
         } else {
             throw new IllegalArgumentException();
         }
     }
 
     public void setIcon(Drawable icon){
-        mIcon.setImageDrawable(icon);
+        mIcon2.setImageDrawable(icon);
     }
     public IconTextView2(Context context, AttributeSet attrs) {
         super(context, attrs);

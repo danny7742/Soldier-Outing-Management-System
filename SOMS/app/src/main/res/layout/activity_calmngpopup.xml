@@ -39,7 +39,7 @@
         android:padding="24dp">
 
         <TextView
-            android:id="@+id/popupText"
+            android:id="@+id/mngpopupText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="3dp"

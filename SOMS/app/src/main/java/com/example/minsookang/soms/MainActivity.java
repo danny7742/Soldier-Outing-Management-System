@@ -46,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        vcabutton.setOnClickListener(new View.OnClickListener(){ // 휴가등록 버튼 눌렀을 경우
+            public void onClick(View v){
+                Intent intent = new Intent(
+                        getApplicationContext(),CalMngPopupActivity.class);
+                startActivity(intent);
+            }
+        });
+
 //        });
 
 

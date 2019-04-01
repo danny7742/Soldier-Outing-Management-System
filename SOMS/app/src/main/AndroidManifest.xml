@@ -16,13 +16,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="LoginActivity"></activity>
-        <activity android:name="UsermngActivity"></activity>
-        <activity android:name="VacationmngActivity"></activity>
-        <activity android:name="ReportformActivity"></activity>
-        <activity android:name="PopupActivity"></activity>
-        <activity android:name=".ReportMessageActivity"></activity>
-
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".UsermngActivity" />
+        <activity android:name=".VacationmngActivity" />
+        <activity android:name=".ReportformActivity" />
+        <activity
+            android:name=".PopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".CalMngPopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".ReportMessageActivity" />
     </application>
 
 </manifest>
