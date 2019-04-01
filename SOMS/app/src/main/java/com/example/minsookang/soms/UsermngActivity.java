@@ -58,55 +58,9 @@ public class UsermngActivity extends AppCompatActivity {
         adapter2.addItem(new IconTextItem2(res.getDrawable(R.drawable.blueheart),song4));
         listView2.setAdapter(adapter2);
 
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {  // 부대에 가입된 병사들의 리스트뷰를 클릭하였을때
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-//                Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
-//                startActivity(intent);
-                Toast.makeText(UsermngActivity.this, "asdfasdf",Toast.LENGTH_SHORT);
-            }
-        });
-
     }
 
 
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode==1)
-//        {
-//            Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
-//            startActivity(intent);
-//        }
-//    }
-//    @Override
-//    public void onBackPressed() {
-//        videoView.pause();
-//        Intent intent = new Intent(this, PopupActivity.class);
-//        intent.putExtra("Songname", Song);
-//        startActivityForResult(intent,MainActivity.SUCCESS_FROM_POPUP);
-//    }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode == MainActivity.SUCCESS_FROM_POPUP){
-//            switch (resultCode){
-//                case MainActivity.RESULT_CONT:
-//                    videoView.start();
-//                    break;
-//                case MainActivity.RESULT_BEGIN:
-//                    audioController.stopAudioProcessor(false);
-//                    Intent intent = new Intent(getApplicationContext(), SongscreenActivity.class);
-//                    intent.putExtra("Songname", Song);
-//                    startActivity(intent);
-//                    finish();
-//                    break;
-//                case MainActivity.RESULT_MAIN:
-//                    audioController.stopAudioProcessor(false);
-//                    finish();
-//                    break;
-//            }
-//        }
-//    }
 }
