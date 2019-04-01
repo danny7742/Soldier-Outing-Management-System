@@ -62,10 +62,10 @@ public class CalMngPopupActivity extends Activity {
         }
 
 
-        Intent intent = new Intent();
-        intent.putExtra("result", "Close Popup");
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("vacplan", strInt1 +"_"+ strInt2 +"_" + strInt3 +"_"+ strInt4 +"_"+ strInt5 +"_"+ strInt6);
         setResult(RESULT_OK, intent);
-
+        startActivity(intent);
         //액티비티(팝업) 닫기
         finish();
     }
