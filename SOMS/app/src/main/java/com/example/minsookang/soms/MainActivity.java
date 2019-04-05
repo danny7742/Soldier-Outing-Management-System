@@ -99,9 +99,7 @@ public class MainActivity extends AppCompatActivity
 
         reportbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
             public void onClick(View v){
-                Intent intent = new Intent(
-                        getApplicationContext(),UsermngActivity.class);
-                startActivity(intent);
+
             }
         });
 
@@ -187,14 +185,14 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    public void vacbutton(View v){
+    public void vacbutton(View v){ // 휴가제한 등록 버튼을 누르면 실행
         Intent intent = new Intent(this, PopupActivity.class);
         intent.putExtra("data", "Test Popup");
         startActivityForResult(intent, 1);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { // 팝업창에서 가지고오는 정보로 실행
         if(requestCode==1){
             if(resultCode==RESULT_OK){
                 //데이터 받기
@@ -242,13 +240,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_userMng) {
+            Intent intent = new Intent(
+                    getApplicationContext(),UsermngActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_vacationMng) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_solVacMng) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_timeMng) {
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

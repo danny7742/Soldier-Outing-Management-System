@@ -44,9 +44,10 @@ public class UsermngActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.list1);
         adapter = new IconTextListAdapter(this);
-        listView2 = (ListView) findViewById(R.id.list2);
 
+        listView2 = (ListView) findViewById(R.id.list2);
         adapter2 = new IconTextListAdapter2(this);
+
         Resources res = getResources();
 
 
@@ -58,9 +59,44 @@ public class UsermngActivity extends AppCompatActivity {
         adapter2.addItem(new IconTextItem2(res.getDrawable(R.drawable.blueheart),song4));
         listView2.setAdapter(adapter2);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
+                String data1 = "1";
+                intent.putExtra("data1", data1);
+                startActivityForResult(intent, 1);
+            }
+        });
+
+
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), PopupActivity.class);
+                String data1 = "2";
+                intent.putExtra("data1", data1);
+                startActivityForResult(intent, 1);
+            }
+        });
+
+
     }
 
+    public void vacbutton(View v){ // 휴가제한 등록 버튼을 누르면 실행
+        Intent intent = new Intent(this, PopupActivity.class);
+        intent.putExtra("data", "Test Popup");
+        startActivityForResult(intent, 1);
+    }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { // 팝업창에서 가지고오는 정보로 실행
+        if(requestCode==1){
+            if(resultCode==RESULT_OK){
+                //데이터 받기
+                String result = data.getStringExtra("result");
+            }
+        }
+    }
 
 }
