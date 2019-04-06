@@ -21,11 +21,15 @@
         </activity>
 
         <activity android:name=".LoginActivity" />
+        <activity android:name=".SoldierVacationMngActivity" />
         <activity android:name=".UsermngActivity" />
         <activity android:name=".VacationmngActivity" />
         <activity android:name=".ReportformActivity" />
         <activity
             android:name=".PopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Solvacamng_popup"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".CalMngPopupActivity"

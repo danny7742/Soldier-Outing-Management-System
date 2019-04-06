@@ -247,7 +247,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_vacationMng) {
 
         } else if (id == R.id.nav_solVacMng) {
-
+            Intent intent3 = new Intent(
+                    getApplicationContext(),SoldierVacationMngActivity.class);
+            startActivity(intent3);
         } else if (id == R.id.nav_timeMng) {
 
         }
