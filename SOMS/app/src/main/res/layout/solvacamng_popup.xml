@@ -30,7 +30,7 @@
             android:layout_weight="1"
             android:background="#ff7a00"
             android:onClick="buttonSetting"
-            android:src="@drawable/setting" />
+            android:src="@android:drawable/ic_menu_preferences" />
 
 
     </LinearLayout>

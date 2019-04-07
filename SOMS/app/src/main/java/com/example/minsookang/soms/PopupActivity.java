@@ -10,8 +10,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class PopupActivity extends Activity {
-    //각종 팝업 관련 Activity 구현 예정
+public class PopupActivity extends Activity { //병사 관리화면에서 해당 병사를 클릭하였을때 승인/제거 팝업창
+
     private int type;
     TextView txtText;
     private String datas;
@@ -27,7 +27,7 @@ public class PopupActivity extends Activity {
 
         txtText = (TextView)findViewById(R.id.popupText);
 
-        if(type==1){
+        if(type==1){ // 승인을 원하는 인원을 클릭하였을 경우 구성되는 팝업내용
             txtText.setText("승인 하시겠습니까?");
             Button button = (Button)findViewById(R.id.popup_button1);
             button.setText("승인하기");
@@ -35,7 +35,7 @@ public class PopupActivity extends Activity {
             button2.setText("닫기");
         }
 
-        else if(type==2){
+        else if(type==2){ // 제거를 원하는 인원을 클릭하였을 경우 구성되는 팝업내용
             txtText.setText("제거 하시겠습니까?");
             Button button = (Button)findViewById(R.id.popup_button1);
             button.setText("제거하기");
@@ -43,9 +43,11 @@ public class PopupActivity extends Activity {
             button2.setText("닫기");
         }
     }
+
     public void buttonLeft(View v){  // 승인하기 혹은 제거하기 버튼 클릭시 작동
 
     }
+
     public void buttonRight(View v){  //닫기 버튼 클릭시 작동
         Intent intent = new Intent();
         intent.putExtra("result", "Close Popup");

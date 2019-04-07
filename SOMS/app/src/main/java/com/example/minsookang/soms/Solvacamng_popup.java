@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Solvacamng_popup extends Activity {
-        //병사출타관리 Activity 구현
+        // 병사 휴가관리 창에서 병사를 눌렀을 때 나타나는 팝업창
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {

@@ -26,44 +26,44 @@ public class CalMngPopupActivity extends Activity {
 
     public void mOnPush(View v){ // 등록하기 버튼 눌렀을 경우
         //데이터 전달하기
-        EditText editText1 = (EditText) findViewById(R.id.editText1) ;
-        String strText1 = editText1.getText().toString() ; // 각 editText들을 int형으로 가져와서 저장
-        int strInt1 = Integer.parseInt(strText1);
-        EditText editText2 = (EditText) findViewById(R.id.editText2) ;
+        EditText editText1 = (EditText) findViewById(R.id.startYear) ;
+        String strText1 = editText1.getText().toString() ; // 각 editText들을 int형으로 가져와서 저장(휴가시작날짜와 복귀날짜를 저장)
+        int startYear = Integer.parseInt(strText1);
+        EditText editText2 = (EditText) findViewById(R.id.startMonth) ;
         String strText2 = editText2.getText().toString() ;
-        int strInt2 = Integer.parseInt(strText2);
-        EditText editText3 = (EditText) findViewById(R.id.editText3) ;
+        int startMonth = Integer.parseInt(strText2);
+        EditText editText3 = (EditText) findViewById(R.id.startDate) ;
         String strText3 = editText3.getText().toString() ;
-        int strInt3 = Integer.parseInt(strText3);
-        EditText editText4 = (EditText) findViewById(R.id.editText4) ;
+        int startDate = Integer.parseInt(strText3);
+        EditText editText4 = (EditText) findViewById(R.id.endYear) ;
         String strText4 = editText4.getText().toString() ;
-        int strInt4 = Integer.parseInt(strText4);
-        EditText editText5 = (EditText) findViewById(R.id.editText5) ;
+        int endYear = Integer.parseInt(strText4);
+        EditText editText5 = (EditText) findViewById(R.id.endMonth) ;
         String strText5 = editText5.getText().toString() ;
-        int strInt5 = Integer.parseInt(strText5);
-        EditText editText6 = (EditText) findViewById(R.id.editText6) ;
+        int endMonth = Integer.parseInt(strText5);
+        EditText editText6 = (EditText) findViewById(R.id.endDate) ;
         String strText6 = editText6.getText().toString() ;
-        int strInt6 = Integer.parseInt(strText6);
-        if(strInt1>3000 || strInt1<0 || strInt4>3000 || strInt4<0){ // editText에 년도, 월, 일을 잘못입력하였을때의 조건
+        int endDate = Integer.parseInt(strText6);
+        if(startYear>3000 || startYear<0 || endYear>3000 || endYear<0){ // editText에 년도, 월, 일을 잘못입력하였을때의 조건
             Toast.makeText(CalMngPopupActivity.this, "년도를 잘못 입력하였습니다.",Toast.LENGTH_SHORT).show();
         }
-        else if(strInt2>13 || strInt2<0 || strInt5>13 || strInt5<0){
+        else if(startMonth>13 || startMonth<0 || endMonth>13 || endMonth<0){
             Toast.makeText(CalMngPopupActivity.this, "월을 잘못 입력하였습니다.",Toast.LENGTH_SHORT).show();
         }
-        else if(((strInt2==1 || strInt2==3 || strInt2==5 || strInt2==7 || strInt2==8 || strInt2==10 || strInt2==12) && strInt3>31)
-                || ((strInt2==4 || strInt2==6 || strInt2==9 || strInt2==11) && strInt3>30)
-                || strInt2==2 && strInt3>29
-                || strInt3<0
-                ||((strInt5==1 || strInt5==3 || strInt5==5 || strInt5==7 || strInt5==8 || strInt5==10 || strInt5==12) && strInt6>31)
-                || ((strInt5==4 || strInt5==6 || strInt5==9 || strInt5==11) && strInt6>30)
-                || strInt5==2 && strInt6>29
-                || strInt6<0 ){
+        else if(((startMonth==1 || startMonth==3 || startMonth==5 || startMonth==7 || startMonth==8 || startMonth==10 || startMonth==12) && startDate>31)
+                || ((startMonth==4 || startMonth==6 || startMonth==9 || startMonth==11) && startDate>30)
+                || startMonth==2 && startDate>29
+                || startDate<0
+                ||((endMonth==1 || endMonth==3 || endMonth==5 || endMonth==7 || endMonth==8 || endMonth==10 || endMonth==12) && endDate>31)
+                || ((endMonth==4 || endMonth==6 || endMonth==9 || endMonth==11) && endDate>30)
+                || endMonth==2 && endDate>29
+                || endDate<0 ){
             Toast.makeText(CalMngPopupActivity.this, "일을 잘못 입력하였습니다.",Toast.LENGTH_SHORT).show();
         }
 
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("vacplan", strInt1 +"_"+ strInt2 +"_" + strInt3 +"_"+ strInt4 +"_"+ strInt5 +"_"+ strInt6);
+        intent.putExtra("vacplan", startYear +"_"+ startMonth +"_" + startDate +"_"+ endYear +"_"+ endMonth +"_"+ endDate);
         setResult(RESULT_OK, intent);
         startActivity(intent);
         //액티비티(팝업) 닫기

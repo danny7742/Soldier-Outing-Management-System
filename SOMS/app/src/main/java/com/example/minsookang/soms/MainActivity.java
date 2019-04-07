@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        switch (state) {  // 병사의 상태에 따라 레이아웃이 바뀜
+        switch (state) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
             case 0: stateimage.setImageResource(R.drawable.yellowheart);
                 reportbutton.setVisibility(View.GONE);
                 break;
@@ -105,20 +105,12 @@ public class MainActivity extends AppCompatActivity
 
 
         vcabutton.setOnClickListener(new View.OnClickListener(){ // 휴가등록 버튼 눌렀을 경우
-            public void onClick(View v){
+            public void onClick(View v){ //
                 Intent intent = new Intent(
                         getApplicationContext(),CalMngPopupActivity.class);
                 startActivity(intent);
             }
         });
-
-
-
-
-
-
-
-
 
 
 
@@ -185,11 +177,8 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    public void vacbutton(View v){ // 휴가제한 등록 버튼을 누르면 실행
-        Intent intent = new Intent(this, PopupActivity.class);
-        intent.putExtra("data", "Test Popup");
-        startActivityForResult(intent, 1);
-    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) { // 팝업창에서 가지고오는 정보로 실행
@@ -236,7 +225,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) { // 네비게이션바에서 눌렀을 때 각각의 항목 레이아웃으로 들어가는거
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -245,7 +234,9 @@ public class MainActivity extends AppCompatActivity
                     getApplicationContext(),UsermngActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_vacationMng) {
-
+            Intent intent = new Intent(
+                    getApplicationContext(),VacationmngActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_solVacMng) {
             Intent intent3 = new Intent(
                     getApplicationContext(),SoldierVacationMngActivity.class);

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <tabs>
+        <tab
+            id="@+id/vacation"
+            icon="@android:drawable/ic_menu_preferences"
+            titile="call"/>
+        <tab
+            id="@+id/waebak"
+            icon="@android:drawable/ic_menu_preferences"
+            titile="contacts"/>
+        <tab
+            id="@+id/waechul"
+            icon="@android:drawable/ic_menu_preferences"
+            titile="macro"/>
+    </tabs>
+
+</PreferenceScreen>
