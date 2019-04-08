@@ -6,24 +6,104 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class Solvacamng_popup2 extends Activity {
         // 병사 휴가관리 창에서 병사를 눌렀을 때 나타나는 팝업창
+    int routinVacMng;
+    int prizeVacMng;
+    int comfortVacMng;
+    String routinVacMngtmp;
+    String prizeVacMngtmp;
+    String comfortVacMngtmp;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setContentView(R.layout.solvacamng_popup2);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.solvacamng_popup2);
 
-            //디비에서 받아와서 해당 병사의 휴가상황을 보여줘야됨
+        Intent intent = getIntent();
+        routinVacMng = intent.getIntExtra("RoutineVacation", 1);
+        prizeVacMng = intent.getIntExtra("PrizeVacation", 1);
+        comfortVacMng = intent.getIntExtra("ComfortVacation", 1);
 
-        }
+        final TextView routinTextMng =(TextView)findViewById(R.id.routinVacationMng);
+        final TextView prizeTextMng = (TextView)findViewById(R.id.prizeVacationMng);
+        final TextView comfortTextMng = (TextView)findViewById(R.id.comfortVacationMng);
+
+        routinTextMng.setText("정기휴가 : " + routinVacMng + "일");
+        prizeTextMng.setText("포상휴가 : " + prizeVacMng + "일");
+        comfortTextMng.setText("위로휴가 : " + comfortVacMng + "일");
+        //디비에서 받아와서 해당 병사의 휴가상황을 보여줘야됨
+
+        Button routinMinus = (Button)findViewById(R.id.routinMinusMng);
+        routinMinus.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                routinVacMng--;
+                routinTextMng.setText("정기휴가 : " + routinVacMng + "일");
+            }
+        });
+
+        Button routinPlus = (Button)findViewById(R.id.routinPlusMng);
+        routinPlus.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                routinVacMng++;
+                routinTextMng.setText("정기휴가 : " + routinVacMng + "일");
+            }
+        });
+
+        Button prizeMinus = (Button)findViewById(R.id.prizeMinusMng);
+        prizeMinus.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                prizeVacMng--;
+                prizeTextMng.setText("포상휴가 : " + prizeVacMng + "일");
+            }
+        });
+
+        Button prizePlus = (Button)findViewById(R.id.prizePlusMng);
+        prizePlus.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                prizeVacMng++;
+                prizeTextMng.setText("포상휴가 : " + prizeVacMng + "일");
+            }
+        });
+
+        Button comfortMinus = (Button)findViewById(R.id.comfortMinusMng);
+        comfortMinus.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                comfortVacMng--;
+                comfortTextMng.setText("위로휴가 : " + comfortVacMng + "일");
+            }
+        });
+
+        Button comfortPlus = (Button)findViewById(R.id.comfortPlusMng);
+        comfortPlus.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                comfortVacMng++;
+                comfortTextMng.setText("위로휴가 : " + comfortVacMng + "일");
+            }
+        });
+
+        Button applyVacChange = (Button)findViewById(R.id.applyVacationChange);
+        applyVacChange.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent();
+                intent.putExtra("isVacChange", 0);
+                intent.putExtra("changedRoutine", routinVacMng);
+                intent.putExtra("changedPrize", prizeVacMng);
+                intent.putExtra("changedComfort", comfortVacMng);
+                setResult(123, intent);
+                finish();
+            }
+        });
+
+    }
 
     public void buttonSetting(View v){  // 설정버튼을 클릭시 작동
 
     }
-
     public void buttonClose(View v){  //닫기 버튼 클릭시 작동
         Intent intent = new Intent();
         intent.putExtra("result", "Close Popup");

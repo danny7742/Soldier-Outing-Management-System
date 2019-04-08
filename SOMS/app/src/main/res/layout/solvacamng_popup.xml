@@ -44,7 +44,7 @@
         android:padding="24dp">
 
         <TextView
-            android:id="@+id/popupText"
+            android:id="@+id/routinVacation"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginBottom="3dp"
@@ -56,7 +56,7 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/popupText2"
+            android:id="@+id/prizeVacation"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginBottom="3dp"
@@ -67,7 +67,7 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/popupText3"
+            android:id="@+id/comfortVacation"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginBottom="3dp"

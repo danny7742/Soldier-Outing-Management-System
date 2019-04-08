@@ -36,8 +36,8 @@ public class SoldierVacationMngActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), Solvacamng_popup.class);
-                String data1 = "1";
-                intent.putExtra("data1", data1);
+                String presentStatus = "1";
+                intent.putExtra("presentStatus", presentStatus);
                 startActivityForResult(intent, 1);
             }
         });
