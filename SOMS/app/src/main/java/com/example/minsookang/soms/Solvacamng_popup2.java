@@ -3,30 +3,24 @@ package com.example.minsookang.soms;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
 
-public class Solvacamng_popup extends Activity {
+public class Solvacamng_popup2 extends Activity {
         // 병사 휴가관리 창에서 병사를 눌렀을 때 나타나는 팝업창
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setContentView(R.layout.solvacamng_popup);
+            setContentView(R.layout.solvacamng_popup2);
 
             //디비에서 받아와서 해당 병사의 휴가상황을 보여줘야됨
 
         }
 
     public void buttonSetting(View v){  // 설정버튼을 클릭시 작동
-        Intent intent = new Intent(this, Solvacamng_popup2.class);
-        intent.putExtra("data", "Test Popup");
-        startActivityForResult(intent, 1);
 
     }
 
