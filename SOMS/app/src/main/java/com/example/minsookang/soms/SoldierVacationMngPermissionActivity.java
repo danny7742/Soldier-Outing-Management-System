@@ -2,14 +2,13 @@ package com.example.minsookang.soms;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
-public class SoldierVacationMngActivity extends AppCompatActivity {
+public class SoldierVacationMngPermissionActivity extends AppCompatActivity {
     //보고를 하는 메세지창
     ListView listView;
     IconTextListAdapter adapter;
@@ -17,9 +16,7 @@ public class SoldierVacationMngActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_soldiervacationmng);
-        Button permbutton = (Button) findViewById(R.id.button2);
-
+        setContentView(R.layout.activity_soldiervacationpermission);
 
         String[] song2 = new String[2];// 리스트뷰 예시 나중에 디비연동해야함
         song2[0] = "병사 2";
@@ -41,17 +38,13 @@ public class SoldierVacationMngActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
-
-        permbutton.setOnClickListener(new View.OnClickListener(){ // 휴가등록 버튼 눌렀을 경우
-            public void onClick(View v){ //
-                Intent intent = new Intent(
-                        getApplicationContext(),SoldierVacationMngPermissionActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
-
+    public void vacbutton(View v){ // 휴가제한 등록 버튼을 누르면 실행
+        Intent intent = new Intent(this, Solvacamng_popup.class);
+        intent.putExtra("data", "Test Popup");
+        startActivityForResult(intent, 1);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) { // 팝업창에서 가지고오는 정보로 실행

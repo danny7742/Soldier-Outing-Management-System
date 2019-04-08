@@ -18,7 +18,7 @@
             android:layout_height="53dp"
             android:background="#ff7a00"
             android:gravity="center"
-            android:text="Notice"
+            android:text="휴가 보유 현황 관리"
             android:textColor="#fff"
             android:textSize="20sp" />
 
@@ -54,7 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="연가 : 28일"
+                android:text="연가 : 21일"
+                android:textColor="#000"
                 android:textAlignment="center"
                  />
 
@@ -91,6 +92,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="포상 : 10일"
+                android:textColor="#000"
                 android:textAlignment="center"
                  />
 
@@ -125,6 +127,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="위로 : 14일"
+                android:textColor="#000"
                 android:textAlignment="center"
                 />
 

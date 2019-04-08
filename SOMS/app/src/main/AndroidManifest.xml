@@ -22,6 +22,7 @@
 
         <activity android:name=".LoginActivity" />
         <activity android:name=".SoldierVacationMngActivity" />
+        <activity android:name=".SoldierVacationMngPermissionActivity" />
         <activity android:name=".UsermngActivity" />
         <activity android:name=".VacationmngActivity" />
         <activity android:name=".ReportformActivity" />
