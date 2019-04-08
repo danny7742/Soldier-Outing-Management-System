@@ -18,7 +18,7 @@
             android:layout_height="53dp"
             android:background="#ff7a00"
             android:gravity="center"
-            android:text="Notice"
+            android:text="휴가 보유 현황"
             android:textColor="#fff"
             android:textSize="20sp" />
 
@@ -46,13 +46,36 @@
         <TextView
             android:id="@+id/popupText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="5dp"
+            android:alpha="0.87"
+            android:gravity="center"
+            android:text="연가 : 21일"
+            android:textColor="#000"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/popupText2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:layout_marginBottom="3dp"
             android:alpha="0.87"
             android:gravity="center"
-            android:text="휴가 내용"
+            android:text="포상 : 10일"
             android:textColor="#000"
-            android:textSize="15sp" />
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/popupText3"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="3dp"
+            android:alpha="0.87"
+            android:gravity="center"
+            android:text="위로 : 14일"
+            android:textColor="#000"
+            android:textSize="17sp" />
     </LinearLayout>
 
     <!-- 닫기 버튼 -->
