@@ -77,14 +77,14 @@ public class WaebakFragment extends ListFragment { //"외박" 바텀바를 클�
         setListAdapter(adapter) ;
 
         // 첫 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.blueheart),
-                "Box2", "Account Box Black 36dp") ;
-        // 두 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.blueheart),
-                "Circle2", "Account Circle Black 36dp") ;
-        // 세 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.blueheart),
-                "Ind2", "Assignment Ind Black 36dp") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
+                "병사 1", "군번1") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
+                "병사 2", "군번2") ;
+
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
+                "병사 3", "군번3") ;
 
         return super.onCreateView(inflater, container, savedInstanceState);
 

@@ -83,14 +83,14 @@ public class VacationFragment extends ListFragment { // 휴가인원 관리 레�
         setListAdapter(adapter) ;
 
         // listview에 들어가는 예시. 나중에 디비연동해야함
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.blueheart),
-                "Box", "Account Box Black 36dp") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
+                "병사 1", "군번1") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.blueheart),
-                "Circle", "Account Circle Black 36dp") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
+                "병사 2", "군번2") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.blueheart),
-                "Ind", "Assignment Ind Black 36dp") ;
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
+                "병사 3", "군번3") ;
 
         return super.onCreateView(inflater, container, savedInstanceState);
 

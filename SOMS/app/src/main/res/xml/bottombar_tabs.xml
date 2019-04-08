@@ -4,16 +4,16 @@
     <tabs>
         <tab
             id="@+id/vacation"
-            icon="@android:drawable/ic_menu_preferences"
-            titile="call"/>
+            icon="@drawable/baseline_airport_shuttle_black_18dp"
+            title="휴가" />
         <tab
             id="@+id/waebak"
-            icon="@android:drawable/ic_menu_preferences"
-            titile="contacts"/>
+            icon="@drawable/baseline_airport_shuttle_black_18dp"
+            title="외박"/>
         <tab
             id="@+id/waechul"
-            icon="@android:drawable/ic_menu_preferences"
-            titile="macro"/>
+            icon="@drawable/baseline_airport_shuttle_black_18dp"
+            title="외출"/>
     </tabs>
 
 </PreferenceScreen>
