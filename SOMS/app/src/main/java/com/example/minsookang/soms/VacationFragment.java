@@ -92,6 +92,9 @@ public class VacationFragment extends ListFragment { // 휴가인원 관리 레�
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
                 "병사 3", "군번3") ;
 
+        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
+                "병사 4", "군번4") ;
+
         return super.onCreateView(inflater, container, savedInstanceState);
 
 

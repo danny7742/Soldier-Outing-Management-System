@@ -33,6 +33,9 @@
             android:name=".Solvacamng_popup"
             android:theme="@android:style/Theme.Dialog" />
         <activity
+            android:name=".PermissionPopup"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
             android:name=".Solvacamng_popup2"
             android:theme="@android:style/Theme.Dialog" />
         <activity

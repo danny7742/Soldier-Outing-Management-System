@@ -79,11 +79,7 @@ public class WaechulFragment extends ListFragment { //"외출" 바텀바를 클�
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
                 "병사 1", "군번1") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "병사 2", "군번2") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "병사 3", "군번3") ;
 
         return super.onCreateView(inflater, container, savedInstanceState);
 
@@ -124,4 +120,5 @@ public class WaechulFragment extends ListFragment { //"외출" 바텀바를 클�
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }
