@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     String endDay;
     String[] datas;
     MaterialCalendarView materialCalendarView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,9 +85,10 @@ public class MainActivity extends AppCompatActivity
             exhibitdates[0] = startYear + ',' + startMonth + ',' + startDay;
             exhibitdates[1] = endYear + ',' + endMonth + ',' + endDay;
 
-            Log.d("testming3", "ApiSimulator");
-            new ApiSimulator(exhibitdates).executeOnExecutor(Executors.newSingleThreadExecutor());
+            Log.d("testming3", exhibitdates[0]);
 
+            Log.d("testming4", exhibitdates[1]);
+            new ApiSimulator(exhibitdates).executeOnExecutor(Executors.newSingleThreadExecutor());
         }
 
         switch (state) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
@@ -146,23 +148,106 @@ public class MainActivity extends AppCompatActivity
 
             Calendar calendar = Calendar.getInstance();
             ArrayList<CalendarDay> dates = new ArrayList<>();
+            int[] exhibitYear= new int[46];
+            int[] exhibitMonth = new int[46];
+            int[] exhibitDay = new int[46];
+            int[] exhibitYearRange= new int[2];
+            int[] exhibitMonthRange = new int[2];
+            int[] exhibitDayRange = new int[2];
+
             Log.d("testming2", Time_Result[0]);
             Log.d("testming1", Time_Result[1]);
+
+            CalendarDay eventDay = CalendarDay.from(calendar);
             /*특정날짜 달력에 점표시해주는곳*/
             /*월은 0이 1월 년,일은 그대로*/
             //string 문자열인 Time_Result 을 받아와서 ,를 기준으로짜르고 string을 int 로 변환
-            for(int i = 0 ; i < Time_Result.length ; i ++){
-                CalendarDay day = CalendarDay.from(calendar);
+            for(int i = 0 ; i < Time_Result.length; i ++){
 
                 String[] time = Time_Result[i].split(",");
-                int year = Integer.parseInt(time[0]);
-                int month = Integer.parseInt(time[1]);
-                int dayy = Integer.parseInt(time[2]);
-
-                dates.add(day);
-                calendar.set(year,month-1,dayy);
+                exhibitYearRange[i] = Integer.parseInt(time[0]);
+                exhibitMonthRange[i] = Integer.parseInt(time[1]);
+                exhibitDayRange[i] = Integer.parseInt(time[2]);
             }
 
+            if(exhibitYearRange[0] == exhibitYearRange[1]){
+                if(exhibitMonthRange[0] == exhibitMonthRange[1]){
+                    if(exhibitDayRange[0] == exhibitDayRange[1]){ // 하루만 선택한 경우
+                        eventDay = CalendarDay.from(exhibitYearRange[0], exhibitMonthRange[0], exhibitDayRange[0]);
+                        dates.add(eventDay);
+                        calendar.set(exhibitYearRange[0], exhibitMonthRange[0] - 1, exhibitDayRange[0]);
+                    }
+                    else{                                       //같은 달 내에 두 날짜를 선택한 경우
+                        for(int i = exhibitDayRange[0]; i < exhibitDayRange[1] + 1; i++) {
+                            exhibitYear[i] = exhibitYearRange[0];
+                            exhibitMonth[i] = exhibitMonthRange[0];
+                            exhibitDay[i] = i;
+
+                            eventDay = CalendarDay.from(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                            dates.add(eventDay);
+                            calendar.set(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                        }
+                    }
+                }
+                else{                                           //달을 넘어간 경우
+                    if(exhibitMonthRange[0] == 1 || exhibitMonthRange[0] == 3 || exhibitMonthRange[0] == 5 || exhibitMonthRange[0] == 7
+                            || exhibitMonthRange[0] == 9 || exhibitMonthRange[0] == 11){
+                        for(int i = exhibitDayRange[0]; i<32; i++){
+                            exhibitYear[i] = exhibitYearRange[0];
+                            exhibitMonth[i] = exhibitMonthRange[0];
+                            exhibitDay[i] = i;
+
+                            eventDay = CalendarDay.from(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                            dates.add(eventDay);
+                            calendar.set(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                        }
+                        for(int i = 1; i<exhibitDayRange[1] + 1; i++){
+                            exhibitDay[i] = i;
+
+                            eventDay = CalendarDay.from(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                            dates.add(eventDay);
+                            calendar.set(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                        }
+                    }
+                    else if(exhibitMonthRange[0] == 4 || exhibitMonthRange[0] == 6 || exhibitMonthRange[0] == 8 || exhibitMonthRange[0] == 10
+                            || exhibitMonthRange[0] == 12){
+                        for(int i = exhibitDayRange[0]; i<31; i++){
+                            exhibitYear[i] = exhibitYearRange[0];
+                            exhibitMonth[i] = exhibitMonthRange[0];
+                            exhibitDay[i] = i;
+
+                            eventDay = CalendarDay.from(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                            dates.add(eventDay);
+                            calendar.set(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                        }
+                        for(int i = 1; i<exhibitDayRange[1] + 1; i++){
+                            exhibitDay[i] = i;
+
+                            eventDay = CalendarDay.from(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                            dates.add(eventDay);
+                            calendar.set(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                        }
+                    }
+                }
+            }
+            else{
+                for(int i = exhibitDayRange[0]; i<32; i++){
+                    exhibitYear[i] = exhibitYearRange[0];
+                    exhibitMonth[i] = exhibitMonthRange[0];
+                    exhibitDay[i] = i;
+
+                    eventDay = CalendarDay.from(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                    dates.add(eventDay);
+                    calendar.set(exhibitYear[i], exhibitMonth[i] - 1, exhibitDay[i]);
+                }
+                for(int i = 1; i<exhibitDayRange[1] + 1; i++){
+                    exhibitDay[i] = i;
+                    exhibitYear[i] = exhibitYearRange[1];
+                    eventDay = CalendarDay.from(exhibitYear[i], 0, exhibitDay[i]);
+                    dates.add(eventDay);
+                    calendar.set(exhibitYear[i] + 1, 0, exhibitDay[i]);
+                }
+            }
 
 
             return dates;

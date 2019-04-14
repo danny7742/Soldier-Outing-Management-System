@@ -40,7 +40,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/routinMinusMng"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center|left"
@@ -49,7 +49,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/routinVacationMng"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -60,7 +60,7 @@
                  />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/routinPlusMng"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center|right"
@@ -77,7 +77,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/prizeMinusMng"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center|left"
@@ -86,7 +86,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/prizeVacationMng"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -97,7 +97,7 @@
                  />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/prizePlusMng"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center|right"
@@ -112,7 +112,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/comfortMinusMng"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center|left"
@@ -121,7 +121,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/comfortVacationMng"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -132,7 +132,7 @@
                 />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/comfortPlusMng"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:layout_gravity="center|right"
@@ -151,7 +151,7 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/popup_button1"
+            android:id="@+id/applyVacationChange"
             android:layout_width="100dp"
             android:layout_height="53dp"
             android:background="#00000000"
