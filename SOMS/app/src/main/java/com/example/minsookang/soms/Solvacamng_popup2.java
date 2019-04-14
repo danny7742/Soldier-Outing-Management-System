@@ -14,9 +14,6 @@ public class Solvacamng_popup2 extends Activity {
     int routinVacMng;
     int prizeVacMng;
     int comfortVacMng;
-    String routinVacMngtmp;
-    String prizeVacMngtmp;
-    String comfortVacMngtmp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +22,9 @@ public class Solvacamng_popup2 extends Activity {
         setContentView(R.layout.solvacamng_popup2);
 
         Intent intent = getIntent();
-        routinVacMng = intent.getIntExtra("RoutineVacation", 1);
-        prizeVacMng = intent.getIntExtra("PrizeVacation", 1);
-        comfortVacMng = intent.getIntExtra("ComfortVacation", 1);
+        routinVacMng = intent.getIntExtra("RoutineVacation", 21);
+        prizeVacMng = intent.getIntExtra("PrizeVacation", 0);
+        comfortVacMng = intent.getIntExtra("ComfortVacation", 0);
 
         final TextView routinTextMng =(TextView)findViewById(R.id.routinVacationMng);
         final TextView prizeTextMng = (TextView)findViewById(R.id.prizeVacationMng);
@@ -86,29 +83,27 @@ public class Solvacamng_popup2 extends Activity {
             }
         });
 
-        Button applyVacChange = (Button)findViewById(R.id.applyVacationChange);
-        applyVacChange.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent();
-                intent.putExtra("isVacChange", 0);
-                intent.putExtra("changedRoutine", routinVacMng);
-                intent.putExtra("changedPrize", prizeVacMng);
-                intent.putExtra("changedComfort", comfortVacMng);
-                setResult(123, intent);
-                finish();
-            }
-        });
+//        Button applyVacChange = (Button)findViewById(R.id.applyVacationChange);
+//        applyVacChange.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View v){
+//                }
+//        });
 
     }
 
-    public void buttonSetting(View v){  // 설정버튼을 클릭시 작동
-
+    public void buttonaccept(View v){  // 설정버튼을 클릭시 작동
+        Intent intent = new Intent();
+        Solvacamng_popup.isChanged = 1;
+        intent.putExtra("changedRoutine", routinVacMng);
+        intent.putExtra("changedPrize", comfortVacMng);
+        intent.putExtra("changedComfort", prizeVacMng);
+        setResult(1234, intent);
+        finish();
     }
     public void buttonClose(View v){  //닫기 버튼 클릭시 작동
         Intent intent = new Intent();
         intent.putExtra("result", "Close Popup");
         setResult(RESULT_OK, intent);
-
         //액티비티(팝업) 닫기
         finish();
     }
