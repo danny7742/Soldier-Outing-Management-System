@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     String endMonth;
     String endDay;
     String[] datas;
+    String result;
     MaterialCalendarView materialCalendarView;
 
     @Override
@@ -51,6 +52,23 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final  JSONReadActivity jsonread = new JSONReadActivity();
+
+        Thread mthread = new Thread(new Runnable() {
+            @Override public void run() {
+                // TODO Auto-generated method stub
+                result =  jsonread.doInBackground(); } });
+
+        mthread.start();
+        try {
+            mthread.join();
+        }
+        catch(Exception e){
+
+        }
+        ArrayList<String> mainresults =jsonread.returnstring();
+
+        Log.d("testinmain",mainresults.get(0));
 
         stateimage = (ImageView) findViewById(R.id.stateimage);
         Button reportbutton = (Button) findViewById(R.id.reportbutton);
