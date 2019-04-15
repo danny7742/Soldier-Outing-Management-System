@@ -28,6 +28,10 @@ public class IconTextListAdapter2 extends BaseAdapter {
         mItems2.add(it);
     }
 
+    public void remove(int position){
+        mItems2.remove(position);
+    }
+
     public void setmItems(List<IconTextItem2> mItems) {
         this.mItems2 = mItems;
     }

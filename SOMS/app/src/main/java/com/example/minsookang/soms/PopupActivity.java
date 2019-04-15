@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -45,7 +46,14 @@ public class PopupActivity extends Activity { //병사 관리화면에서 해당
     }
 
     public void buttonLeft(View v){  // 승인하기 혹은 제거하기 버튼 클릭시 작동
-
+        Intent intent = new Intent();
+        Log.d("leftbutton test", "leftbutton test");
+        if(type == 1)
+            intent.putExtra("approve", 1);
+        else
+            intent.putExtra("erase", 1);
+        setResult(112, intent);
+        finish();
     }
 
     public void buttonRight(View v){  //닫기 버튼 클릭시 작동

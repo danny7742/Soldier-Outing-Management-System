@@ -1,6 +1,10 @@
 package com.example.minsookang.soms;
 
-public class Userinfo {
+import java.io.Serializable;
+
+public class Userinfo implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     private String user_name;
     private int user_serialNum;
     private int troop_code;
