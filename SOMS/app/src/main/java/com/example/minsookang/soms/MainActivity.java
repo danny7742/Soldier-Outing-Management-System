@@ -341,6 +341,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_userMng) {
             Intent intent = new Intent(
                     getApplicationContext(),UsermngActivity.class);
+
+            intent.putExtra("UserinfoList", userinfoList);
             startActivity(intent);
         } else if (id == R.id.nav_vacationMng) {
             Intent intent = new Intent(
