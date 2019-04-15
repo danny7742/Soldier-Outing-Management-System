@@ -17,9 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity"
-            android:label="SOMS"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +26,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity"
+            android:label="SOMS"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".SoldierVacationMngActivity" />
         <activity android:name=".SoldierVacationMngPermissionActivity" />
         <activity android:name=".UsermngActivity" />
