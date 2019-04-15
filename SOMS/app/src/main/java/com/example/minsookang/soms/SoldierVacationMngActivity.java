@@ -9,27 +9,33 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class SoldierVacationMngActivity extends AppCompatActivity {
     //보고를 하는 메세지창
     ListView listView;
     IconTextListAdapter adapter;
+    ArrayList<Userinfo> userinfomngList = new ArrayList<Userinfo>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soldiervacationmng);
         Button permbutton = (Button) findViewById(R.id.button2);
+        Resources res = getResources();
+        userinfomngList = (ArrayList<Userinfo>) getIntent().getSerializableExtra("UserinfoList");
 
-
-        String[] song2 = new String[2];// 리스트뷰 예시 나중에 디비연동해야함
-        song2[0] = "병사 2";
-        song2[1] = "19-34895678";
 
         listView = (ListView) findViewById(R.id.listview1);
         adapter = new IconTextListAdapter(this);
-        Resources res = getResources();
 
-        adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.blueheart),song2));
+        for (int i = 0; i < userinfomngList.size(); i++) {
+            String[] tmpuser = new String[2];
+            tmpuser[0] = userinfomngList.get(i).getUser_Name();
+            tmpuser[1] = String.valueOf(userinfomngList.get(i).getUser_serialNum());
+            adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.blueheart), tmpuser));
+        }
+
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
