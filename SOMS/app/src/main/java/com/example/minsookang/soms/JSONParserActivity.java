@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutionException;
 
 public class JSONParserActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
