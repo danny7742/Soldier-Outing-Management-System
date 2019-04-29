@@ -58,6 +58,7 @@
             android:onClick="buttonLeft"
             android:padding="16dp"
             android:text="승인하기"
+            android:backgroundTint="#2F4F4F"
             android:textColor="#ff7a00"
             android:textSize="15sp" />
 

@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
     String result;
     MaterialCalendarView materialCalendarView;
 
-    DynamoDBMapper dynamoDBMapper;
+//    DynamoDBMapper dynamoDBMapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,37 +62,37 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         // AWSMobileClient enables AWS user credentials to access your table
-        AWSMobileClient.getInstance().initialize(this).execute();
+//        AWSMobileClient.getInstance().initialize(this).execute();
+//
+//        AWSCredentialsProvider credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
+//        AWSConfiguration configuration = AWSMobileClient.getInstance().getConfiguration();
+//
+//
+//        // Add code to instantiate a AmazonDynamoDBClient
+//        AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(credentialsProvider);
+//
+//        this.dynamoDBMapper = DynamoDBMapper.builder()
+//                .dynamoDBClient(dynamoDBClient)
+//                .awsConfiguration(configuration)
+//                .build();
 
-        AWSCredentialsProvider credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
-        AWSConfiguration configuration = AWSMobileClient.getInstance().getConfiguration();
-
-
-        // Add code to instantiate a AmazonDynamoDBClient
-        AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(credentialsProvider);
-
-        this.dynamoDBMapper = DynamoDBMapper.builder()
-                .dynamoDBClient(dynamoDBClient)
-                .awsConfiguration(configuration)
-                .build();
-
-        final JSONReadActivity jsonread = new JSONReadActivity();
-
-        Thread mthread = new Thread(new Runnable() {
-            @Override public void run() {
-                // TODO Auto-generated method stub
-                result =  jsonread.doInBackground(); } });
-
-        mthread.start();
-        try {
-            mthread.join();
-        }
-        catch(Exception e){
-
-        }
-        userinfoList =jsonread.returnUserinfo();
-
-        Log.d("testinmain",userinfoList.get(2).getUser_Name());
+//        final JSONReadActivity jsonread = new JSONReadActivity();
+//
+//        Thread mthread = new Thread(new Runnable() {
+//            @Override public void run() {
+//                // TODO Auto-generated method stub
+//                result =  jsonread.doInBackground(); } });
+//
+//        mthread.start();
+//        try {
+//            mthread.join();
+//        }
+//        catch(Exception e){
+//
+//        }
+//        userinfoList =jsonread.returnUserinfo();
+//
+//        Log.d("testinmain",userinfoList.get(2).getUser_Name());
 
         stateimage = (ImageView) findViewById(R.id.stateimage);
         Button reportbutton = (Button) findViewById(R.id.reportbutton);
@@ -148,7 +148,9 @@ public class MainActivity extends AppCompatActivity
 
         reportbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
             public void onClick(View v){
-
+                Intent intent = new Intent(
+                        getApplicationContext(),BriefActivity.class);
+                startActivity(intent);
             }
         });
 
