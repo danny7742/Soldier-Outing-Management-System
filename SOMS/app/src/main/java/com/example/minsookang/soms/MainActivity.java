@@ -19,6 +19,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.config.AWSConfiguration;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -46,6 +52,8 @@ public class MainActivity extends AppCompatActivity
     String result;
     MaterialCalendarView materialCalendarView;
 
+//    DynamoDBMapper dynamoDBMapper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,23 +61,38 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final JSONReadActivity jsonread = new JSONReadActivity();
+        // AWSMobileClient enables AWS user credentials to access your table
+//        AWSMobileClient.getInstance().initialize(this).execute();
+//
+//        AWSCredentialsProvider credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
+//        AWSConfiguration configuration = AWSMobileClient.getInstance().getConfiguration();
+//
+//
+//        // Add code to instantiate a AmazonDynamoDBClient
+//        AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(credentialsProvider);
+//
+//        this.dynamoDBMapper = DynamoDBMapper.builder()
+//                .dynamoDBClient(dynamoDBClient)
+//                .awsConfiguration(configuration)
+//                .build();
 
-        Thread mthread = new Thread(new Runnable() {
-            @Override public void run() {
-                // TODO Auto-generated method stub
-                result =  jsonread.doInBackground(); } });
-
-        mthread.start();
-        try {
-            mthread.join();
-        }
-        catch(Exception e){
-
-        }
-        userinfoList =jsonread.returnUserinfo();
-
-        Log.d("testinmain",userinfoList.get(2).getUser_Name());
+//        final JSONReadActivity jsonread = new JSONReadActivity();
+//
+//        Thread mthread = new Thread(new Runnable() {
+//            @Override public void run() {
+//                // TODO Auto-generated method stub
+//                result =  jsonread.doInBackground(); } });
+//
+//        mthread.start();
+//        try {
+//            mthread.join();
+//        }
+//        catch(Exception e){
+//
+//        }
+//        userinfoList =jsonread.returnUserinfo();
+//
+//        Log.d("testinmain",userinfoList.get(2).getUser_Name());
 
         stateimage = (ImageView) findViewById(R.id.stateimage);
         Button reportbutton = (Button) findViewById(R.id.reportbutton);
@@ -125,7 +148,9 @@ public class MainActivity extends AppCompatActivity
 
         reportbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
             public void onClick(View v){
-
+                Intent intent = new Intent(
+                        getApplicationContext(),BriefActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -354,7 +379,9 @@ public class MainActivity extends AppCompatActivity
             intent3.putExtra("UserinfoList", userinfoList);
             startActivity(intent3);
         } else if (id == R.id.nav_timeMng) {
-
+            Intent intent = new Intent(
+                    getApplicationContext(),ReportformActivity.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

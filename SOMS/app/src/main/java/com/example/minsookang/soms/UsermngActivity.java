@@ -139,8 +139,8 @@ public class UsermngActivity extends AppCompatActivity {
 
                     Log.d("errortest", userlistwait.get(selecteditempos).id);
                     tmp2user[1] = userlistwait.get(selecteditempos).id;
-
-                    adapter2.addItem(new IconTextItem2(getDrawable(R.drawable.blueheart), tmp2user));
+                    Resources res = getResources();
+                    adapter2.addItem(new IconTextItem2(res.getDrawable(R.drawable.blueheart), tmp2user));
                     userlistapprove.add(userlistwait.get(selecteditempos));
                     userlistwait.remove(selecteditempos);
 

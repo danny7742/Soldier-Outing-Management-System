@@ -17,7 +17,7 @@
             android:layout_height="53dp"
             android:background="#ff7a00"
             android:gravity="center"
-            android:text="Notice"
+            android:text="휴가 보고시간"
             android:textColor="#fff"
             android:textSize="20sp" />
 
@@ -27,20 +27,39 @@
     <!-- Notice -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="166dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_gravity="center"
         android:padding="24dp">
 
         <TextView
-            android:id="@+id/popupText"
+            android:id="@+id/txt1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="3dp"
-            android:alpha="0.87"
-            android:gravity="center"
-            android:text="알림 내용"
-            android:textColor="#000"
-            android:textSize="15sp" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textColor="#000000"
+            android:text="알람시간" />
+
+        <TextView
+            android:id="@+id/alarmtime"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="8dp"
+            android:text="알람시간 적어주기" />
+
+        <TextView
+            android:id="@+id/txt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textColor="#000000"
+            android:text="알람내용" />
+
+        <TextView
+            android:id="@+id/alarmtext"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="알람내용 적어주기" />
     </LinearLayout>
 
     <!-- 닫기 버튼 -->
@@ -55,10 +74,9 @@
             android:layout_width="100dp"
             android:layout_height="53dp"
             android:background="#00000000"
-            android:onClick="buttonLeft"
+            android:onClick="mOnPush"
             android:padding="16dp"
-            android:text="승인하기"
-            android:backgroundTint="#2F4F4F"
+            android:text="수정하기"
             android:textColor="#ff7a00"
             android:textSize="15sp" />
 
@@ -68,10 +86,22 @@
             android:layout_height="53dp"
             android:background="#00000000"
             android:padding="16dp"
+            android:text="삭제하기"
+            android:textColor="#ff7a00"
+            android:textSize="15sp"
+            android:onClick="mOnClose"/>
+
+        <Button
+            android:id="@+id/popup_button3"
+            android:layout_width="100dp"
+            android:layout_height="53dp"
+            android:background="#00000000"
+            android:padding="16dp"
             android:text="닫기"
             android:textColor="#ff7a00"
             android:textSize="15sp"
-            android:onClick="buttonRight"/>
+            android:onClick="mOnClose"/>
+
 
     </LinearLayout>
     <!--// 닫기 버튼 -->

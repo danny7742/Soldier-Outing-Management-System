@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.minsookang.soms">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,25 +16,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".LoginActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:label="SOMS"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SoldierVacationMngActivity" />
         <activity android:name=".SoldierVacationMngPermissionActivity" />
         <activity android:name=".UsermngActivity" />
+        <activity android:name=".BriefActivity" />
         <activity android:name=".VacationmngActivity" />
         <activity android:name=".ReportformActivity" />
+        <activity android:name=".RfVacationActivity" />
+        <activity android:name=".RfwaebakActivity" />
+        <activity android:name=".RfwaechulActivity" />
         <activity
             android:name=".PopupActivity"
             android:theme="@android:style/Theme.Dialog" />
@@ -50,8 +52,12 @@
         <activity
             android:name=".CalMngPopupActivity"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".ReportMessageActivity" />
-
+        <activity
+            android:name=".Rfvaca_popup"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Rfvaca_popup2"
+            android:theme="@android:style/Theme.Dialog" />
     </application>
 
 </manifest>
