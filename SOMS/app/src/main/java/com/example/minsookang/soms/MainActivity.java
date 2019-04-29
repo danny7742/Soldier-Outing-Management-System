@@ -379,7 +379,9 @@ public class MainActivity extends AppCompatActivity
             intent3.putExtra("UserinfoList", userinfoList);
             startActivity(intent3);
         } else if (id == R.id.nav_timeMng) {
-
+            Intent intent = new Intent(
+                    getApplicationContext(),ReportformActivity.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

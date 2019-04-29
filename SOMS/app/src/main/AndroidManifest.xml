@@ -34,6 +34,9 @@
         <activity android:name=".BriefActivity" />
         <activity android:name=".VacationmngActivity" />
         <activity android:name=".ReportformActivity" />
+        <activity android:name=".RfVacationActivity" />
+        <activity android:name=".RfwaebakActivity" />
+        <activity android:name=".RfwaechulActivity" />
         <activity
             android:name=".PopupActivity"
             android:theme="@android:style/Theme.Dialog" />
@@ -48,6 +51,12 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".CalMngPopupActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Rfvaca_popup"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Rfvaca_popup2"
             android:theme="@android:style/Theme.Dialog" />
     </application>
 

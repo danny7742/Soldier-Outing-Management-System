@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import java.util.ArrayList;
 
 public class BriefAdapter extends BaseAdapter {
@@ -116,32 +113,6 @@ public class BriefAdapter extends BaseAdapter {
             viewRight.setVisibility(View.VISIBLE);
             viewLeft.setVisibility(View.VISIBLE);
         }
-
-
-
-        // 리스트 아이템을 터치 했을 때 이벤트 발생
-        convertView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // 터치 시 해당 아이템 이름 출력
-                Toast.makeText(context, "리스트 클릭 : "+m_List.get(pos), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
-        // 리스트 아이템을 길게 터치 했을때 이벤트 발생
-        convertView.setOnLongClickListener(new View.OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(View v) {
-                // 터치 시 해당 아이템 이름 출력
-                Toast.makeText(context, "리스트 롱 클릭 : "+m_List.get(pos), Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
-
         return convertView;
     }
 
