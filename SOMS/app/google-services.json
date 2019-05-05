@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "839327019105",
+    "firebase_url": "https://soms-aeda7.firebaseio.com",
+    "project_id": "soms-aeda7",
+    "storage_bucket": "soms-aeda7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839327019105:android:e89bf6b0eb51d2f8",
+        "android_client_info": {
+          "package_name": "com.example.minsookang.soms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839327019105-pkj0pml5g60tgaukaietr2gkhi1upp2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.minsookang.soms",
+            "certificate_hash": "f4cea8b6e2a9423b447870c9a8bc47c9eb9c9d8a"
+          }
+        },
+        {
+          "client_id": "839327019105-pdammsn4iuki3197u46foiio271mfr34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACNsMHe5_8n_fDGTH4b7lZhDhVBITXods"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839327019105-pdammsn4iuki3197u46foiio271mfr34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

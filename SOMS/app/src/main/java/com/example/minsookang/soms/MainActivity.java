@@ -20,11 +20,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobile.config.AWSConfiguration;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -33,10 +37,16 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+import static android.support.constraint.Constraints.TAG;
+
 public class MainActivity extends AppCompatActivity
+
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ImageView stateimage;
@@ -52,7 +62,10 @@ public class MainActivity extends AppCompatActivity
     String result;
     MaterialCalendarView materialCalendarView;
 
-//    DynamoDBMapper dynamoDBMapper;
+    // 파이어베이스 객체 생성
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,20 +74,21 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // AWSMobileClient enables AWS user credentials to access your table
-//        AWSMobileClient.getInstance().initialize(this).execute();
-//
-//        AWSCredentialsProvider credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
-//        AWSConfiguration configuration = AWSMobileClient.getInstance().getConfiguration();
-//
-//
-//        // Add code to instantiate a AmazonDynamoDBClient
-//        AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(credentialsProvider);
-//
-//        this.dynamoDBMapper = DynamoDBMapper.builder()
-//                .dynamoDBClient(dynamoDBClient)
-//                .awsConfiguration(configuration)
-//                .build();
+        db.collection("UserInformation")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
 
 //        final JSONReadActivity jsonread = new JSONReadActivity();
 //
