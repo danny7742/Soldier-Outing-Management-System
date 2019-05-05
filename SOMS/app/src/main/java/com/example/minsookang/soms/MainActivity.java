@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity
     String result;
     MaterialCalendarView materialCalendarView;
 
-    // 파이어베이스 객체 생성
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
