@@ -1,5 +1,6 @@
 package com.example.minsookang.soms;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
@@ -54,7 +55,7 @@ public class BriefActivity extends AppCompatActivity {
     ListView lv;
     Button btn;
     EditText edt;
-    public String id = "강민수";
+    public String id = "민성재";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,7 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         edt = findViewById(R.id.brieftext);
         btn = findViewById(R.id.sendbtn);
 
-// Write a message to the database
+   // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         final DatabaseReference myRef = database.getReference("message");
@@ -131,6 +132,15 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        Button gpsbutton = (Button) findViewById(R.id.gpsbtn);
+        gpsbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
+            public void onClick(View v){
+                Intent intent = new Intent(
+                        getApplicationContext(),BriefActivity.class);///////////////////////클래스 니껄로 바꿔
+                startActivity(intent);
             }
         });
     }
