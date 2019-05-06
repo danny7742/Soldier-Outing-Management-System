@@ -88,7 +88,7 @@
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:maxLength="4"
+            android:maxLength="20"
             android:hint="알람내용"
             android:gravity="center"
             android:layout_weight="1" />
