@@ -22,6 +22,7 @@ public class VacationmngActivity extends FragmentActivity {
     //병사출타관리 Activity 구현
     //바텀바를 사용하여 "휴가", "외박", "외출"을 세가지 항목으로 나누어 구현
     private VacationFragment vacationFragment;
+    private VacationFragment2 vacationFragment2;
     private WaebakFragment waebakFragment;
     private WaechulFragment waechulFragment;
 
@@ -31,21 +32,25 @@ public class VacationmngActivity extends FragmentActivity {
         setContentView(R.layout.activity_vacationmng);
 
         vacationFragment = new VacationFragment();
+        vacationFragment2 = new VacationFragment2();
         waebakFragment = new WaebakFragment();
         waechulFragment = new WaechulFragment();
 
 
 
         initFragment();
+        initFragment2();
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener(){
             @Override
             public void onTabSelected(@IdRes int tabId){
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
 
                 if(tabId == R.id.vacation){
                     transaction.replace(R.id.contentContainer, vacationFragment).commit();
+                    transaction2.replace(R.id.contentContainer2, vacationFragment2).commit();
                 }
                 else if(tabId == R.id.waebak){
                     transaction.replace(R.id.contentContainer, waebakFragment).commit();
@@ -63,6 +68,13 @@ public class VacationmngActivity extends FragmentActivity {
     public void initFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.contentContainer, vacationFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void initFragment2(){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.contentContainer2, vacationFragment2);
         transaction.addToBackStack(null);
         transaction.commit();
     }
