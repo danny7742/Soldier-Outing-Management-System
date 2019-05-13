@@ -3,11 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:id="@+id/contentContainer2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="370dp"
+        android:layout_above="@+id/bottomBar"
+        />
 
 <FrameLayout
     android:id="@+id/contentContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="270dp"
     android:layout_above="@+id/bottomBar"
     />
 
@@ -17,5 +26,26 @@
     android:layout_height="60dp"
     android:layout_alignParentBottom="true"
     app:bb_tabXmlResource="@xml/bottombar_tabs"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="13dp"
+        android:textSize="15dp"
+        android:text="출타 승인 대기자 목록" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginBottom="300dp"
+        android:textSize="15dp"
+        android:text="출타자 목록" />
 
 </RelativeLayout>
