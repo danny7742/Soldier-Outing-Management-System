@@ -55,7 +55,10 @@ public class BriefActivity extends AppCompatActivity {
     ListView lv;
     Button btn;
     EditText edt;
-    public String id = "민성재";
+    public String userid = "강민수";
+    public int userclass = 2;
+    String intentid = "조장연";
+    String msgname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,21 +71,25 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         edt = findViewById(R.id.brieftext);
         btn = findViewById(R.id.sendbtn);
 
-   // Write a message to the database
+        // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        final DatabaseReference myRef = database.getReference("message");
 
+        if(userclass ==1)
+            msgname = userid + "message";
+        else
+            msgname = intentid + "message";
 
+        final DatabaseReference myRef = database.getReference(msgname);
 
 
 //로그인한 아이디
-       // id =
+        // id =
 //lv.setAdapter(adapter);
 
 //list.add(new ChatVO(R.drawable.profile3, "찡찡이", "안녕", "오후 4:42"));
 
-        final BriefAdapter adapter = new BriefAdapter(getApplicationContext(), R.layout.brief_item, list, id);
+        final BriefAdapter adapter = new BriefAdapter(getApplicationContext(), R.layout.brief_item, list, userid);
         ((ListView) findViewById(R.id.brieflist)).setAdapter(adapter);
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +110,7 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
 //list.add(new ChatVO(R.drawable.profile1, id, sb.toString(), timeNow.format(today)));
 //adapter.notifyDataSetChanged();
 
-                    myRef.push().setValue(new ChatVO(id, sb.toString(), timeNow.format(today)));
+                    myRef.push().setValue(new ChatVO(userid, sb.toString(), timeNow.format(today)));
                     edt.setText("");
                 }
             }
@@ -139,9 +146,11 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         gpsbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
             public void onClick(View v){
                 Intent intent = new Intent(
-                        getApplicationContext(),MapsActivity.class);///////////////////////클래스 니껄로 바꿔
+                        getApplicationContext(),BriefActivity.class);///////////////////////클래스 니껄로 바꿔
                 startActivity(intent);
             }
         });
     }
 }
+
+
