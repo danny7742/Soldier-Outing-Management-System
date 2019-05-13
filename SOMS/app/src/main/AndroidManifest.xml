@@ -61,6 +61,9 @@
         <activity
             android:name=".Rfvaca_popup2"
             android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Rfvaca_popup3"
+            android:theme="@android:style/Theme.Dialog" />
     </application>
 
 </manifest>

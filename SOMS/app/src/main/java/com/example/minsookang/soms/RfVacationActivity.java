@@ -20,7 +20,11 @@ public class RfVacationActivity extends AppCompatActivity {
     String numMinute = null;
     String contentReason = null;
     ListView listview = null;
-
+    ArrayList<String> RfVacMngFirstorEnd = new ArrayList<String>();
+    ArrayList<String> RfVacMngnumHour = new ArrayList<String>();
+    ArrayList<String> RfVacMngnumMinute = new ArrayList<String>();
+    ArrayList<String> RfVacMngContentReason = new ArrayList<String>();
+    static int getchecked = 0;
 
     //데이터를 저장하게 되는 리스트
     List<String> list = new ArrayList<>();
@@ -52,8 +56,12 @@ public class RfVacationActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(
                         getApplicationContext(), Rfvaca_popup2.class);
+                intent.putExtra("listFirstorEnd", RfVacMngFirstorEnd.get(position));
+                intent.putExtra("listnumHour", RfVacMngnumHour.get(position));
+                intent.putExtra("listnumMinute", RfVacMngnumMinute.get(position));
+                intent.putExtra("listContentReason", RfVacMngContentReason.get(position));
                 startActivityForResult(intent, 1);
-
+                getchecked = position;
             }
         });
 
@@ -85,13 +93,33 @@ public class RfVacationActivity extends AppCompatActivity {
                 Log.d("testFirstorEnd", numHour);
                 Log.d("testFirstorEnd", numMinute);
                 Log.d("testFirstorEnd", contentReason);
-
+                RfVacMngFirstorEnd.add(FirstorEnd);
+                RfVacMngnumHour.add(numHour);
+                RfVacMngnumMinute.add(numMinute);
+                RfVacMngContentReason.add(contentReason);
+                //DB에 정보 입력
                 list.add(contentReason + ": " + FirstorEnd + " " + numHour + "시 " + numMinute + "분");
                 listview.clearChoices();
                 // listview 갱신.
                 adapter.notifyDataSetChanged();
 
             }
+            else if(resultCode == 12345){
+                Intent intent = data;
+                FirstorEnd = intent.getStringExtra("checkFirstorEnd");
+                numHour = intent.getStringExtra("numHour");
+                numMinute = intent.getStringExtra("numMinute");
+                contentReason = intent.getStringExtra("reportReason");
+                list.set(getchecked, contentReason + ": " + FirstorEnd + " " + numHour + "시 " + numMinute + "분");
+                RfVacMngFirstorEnd.set(getchecked, FirstorEnd);
+                RfVacMngnumHour.set(getchecked, numHour);
+                RfVacMngnumMinute.set(getchecked, numMinute);
+                RfVacMngContentReason.set(getchecked, contentReason);
+                listview.clearChoices();
+                // listview 갱신.
+                adapter.notifyDataSetChanged();
+            }
         }
     }
+
 }
