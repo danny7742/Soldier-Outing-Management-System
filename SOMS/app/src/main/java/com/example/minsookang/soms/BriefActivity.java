@@ -139,7 +139,7 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         gpsbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
             public void onClick(View v){
                 Intent intent = new Intent(
-                        getApplicationContext(),BriefActivity.class);///////////////////////클래스 니껄로 바꿔
+                        getApplicationContext(),MapsActivity.class);///////////////////////클래스 니껄로 바꿔
                 startActivity(intent);
             }
         });
