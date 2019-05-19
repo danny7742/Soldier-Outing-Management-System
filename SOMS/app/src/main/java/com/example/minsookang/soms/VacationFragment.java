@@ -17,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,7 @@ import android.widget.TextView;
 public class VacationFragment extends ListFragment { // 휴가인원 관리 레이아웃에서 바텀바 "휴가"를 클릭하였을 때 나오는 fragment 코드
     ListViewAdapter2 adapter;
     TextView textview;
+    ArrayList<Userinfo> userinfomngList = new ArrayList<Userinfo>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,28 +87,24 @@ public class VacationFragment extends ListFragment { // 휴가인원 관리 레�
 
         // listview에 들어가는 예시. 나중에 디비연동해야함
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "병사 1", "군번1") ;
+                "테스트", "15-11111111") ;
 
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "병사 2", "군번2") ;
+                "조장연", "15-76070186") ;
 
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "병사 3", "군번3") ;
-
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "병사 4", "군번4") ;
-
+                "민성재", "15-76073397") ;
+//
+//        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
+//                "강민수", "15-76089852") ;
         return super.onCreateView(inflater, container, savedInstanceState);
-
-
-
 
     }
 
     @Override
     public void onListItemClick (ListView l, View v, int position, long id) {
         // get TextView's Text.
-        ListViewItem item = (ListViewItem) l.getItemAtPosition(position) ;
+        ListViewItem item = (ListViewItem) l.getItemAtPosition(position);
 
         String titleStr = item.getTitle() ;
         String descStr = item.getDesc() ;
