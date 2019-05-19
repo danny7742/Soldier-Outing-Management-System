@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#eeeeee"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <!-- 타이틀바 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:background="#ff7a00"
+            android:gravity="center"
+            android:text="외박 신청"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+    <!-- //end 타이틀바 -->
+
+    <!-- Notice -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/startYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:maxLength="4"
+                    android:hint="년도"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/startMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:maxLength="2"
+                    android:hint="월"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/startDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:maxLength="2"
+                    android:hint="일"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="~"
+                android:layout_gravity="center"
+                android:textColor="#ff7a00"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center">
+
+                <EditText
+                    android:id="@+id/endYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:maxLength="4"
+                    android:hint="년도"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/endMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:maxLength="2"
+                    android:hint="월"
+                    android:layout_weight="1" />
+
+                <EditText
+                    android:id="@+id/endDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:maxLength="2"
+                    android:hint="일"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <TextView
+            android:id="@+id/popupText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="3dp"
+            android:alpha="0.87"
+            android:gravity="center"
+            android:text="외박을 신청합니다."
+            android:textColor="#000"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <!-- 닫기 버튼 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/popup_button1"
+            android:layout_width="100dp"
+            android:layout_height="53dp"
+            android:background="#00000000"
+            android:onClick="buttonLeft"
+            android:padding="16dp"
+            android:text="승인하기"
+            android:backgroundTint="#2F4F4F"
+            android:textColor="#ff7a00"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/popup_button2"
+            android:layout_width="100dp"
+            android:layout_height="53dp"
+            android:background="#00000000"
+            android:padding="16dp"
+            android:text="닫기"
+            android:textColor="#ff7a00"
+            android:textSize="15sp"
+            android:onClick="buttonRight"/>
+        </LinearLayout>
+    </LinearLayout>
+    <!--// 닫기 버튼 -->
+</LinearLayout>

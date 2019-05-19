@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +30,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity
     String[] datas;
     String result;
     MaterialCalendarView materialCalendarView;
-
+    int a=1;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -89,23 +92,24 @@ public class MainActivity extends AppCompatActivity
                 });
 
 
-//        final JSONReadActivity jsonread = new JSONReadActivity();
-//
-//        Thread mthread = new Thread(new Runnable() {
-//            @Override public void run() {
-//                // TODO Auto-generated method stub
-//                result =  jsonread.doInBackground(); } });
-//
-//        mthread.start();
-//        try {
-//            mthread.join();
-//        }
-//        catch(Exception e){
-//
-//        }
-//        userinfoList =jsonread.returnUserinfo();
-//
-//        Log.d("testinmain",userinfoList.get(2).getUser_Name());
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, msg);
+                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         stateimage = (ImageView) findViewById(R.id.stateimage);
         Button reportbutton = (Button) findViewById(R.id.reportbutton);
@@ -178,13 +182,21 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);//////////사용자의 계급에 따라 네비게이션바 메뉴구성 변경
+        if(a==1)
+        {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.soldier_menu);
+
+        }
+
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -348,27 +360,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -395,7 +386,12 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(
                     getApplicationContext(),ReportformActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_vacationreq) {
+            Intent intent = new Intent(
+                    getApplicationContext(),VacationRequestActivity.class);
+            startActivity(intent);
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#eeeeee"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <!-- 타이틀바 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:background="#ff7a00"
+            android:gravity="center"
+            android:text="휴가 신청"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+    <!-- //end 타이틀바 -->
+
+    <!-- Notice -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/startYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLength="4"
+                android:hint="년도"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/startMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLength="2"
+                android:hint="월"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLength="2"
+                android:hint="일"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="~"
+            android:layout_gravity="center"
+            android:textColor="#ff7a00"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/endYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLength="4"
+                android:hint="년도"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/endMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLength="2"
+                android:hint="월"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLength="2"
+                android:hint="일"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/routinMinusMng"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center|left"
+                android:text="-"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/routinVacationMng"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="연가 : 21일"
+                android:textColor="#000"
+                android:textAlignment="center"
+                 />
+
+            <Button
+                android:id="@+id/routinPlusMng"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center|right"
+                android:text="+"
+                android:textAlignment="center"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/prizeMinusMng"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center|left"
+                android:text="-"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/prizeVacationMng"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="포상 : 10일"
+                android:textColor="#000"
+                android:textAlignment="center"
+                 />
+
+            <Button
+                android:id="@+id/prizePlusMng"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center|right"
+                android:text="+"
+                android:textAlignment="center"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/comfortMinusMng"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center|left"
+                android:text="-"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/comfortVacationMng"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="위로 : 14일"
+                android:textColor="#000"
+                android:textAlignment="center"
+                />
+
+            <Button
+                android:id="@+id/comfortPlusMng"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_gravity="center|right"
+                android:text="+"
+                android:textAlignment="center"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 닫기 버튼 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/applyVacationChange"
+            android:layout_width="100dp"
+            android:layout_height="53dp"
+            android:background="#00000000"
+            android:onClick="buttonaccept"
+            android:padding="16dp"
+            android:text="신청하기"
+            android:textColor="#ff7a00"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/popup_button2"
+            android:layout_width="100dp"
+            android:layout_height="53dp"
+            android:background="#00000000"
+            android:padding="16dp"
+            android:text="닫기"
+            android:textColor="#ff7a00"
+            android:textSize="15sp"
+            android:onClick="buttonClose"/>
+
+    </LinearLayout>
+    <!--// 닫기 버튼 -->
+</LinearLayout>
+

@@ -49,6 +49,7 @@
             android:label="SOMS"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".VacationRequestActivity" />
         <activity android:name=".SoldierVacationMngActivity" />
         <activity android:name=".SoldierVacationMngPermissionActivity" />
         <activity android:name=".UsermngActivity" />
@@ -69,6 +70,15 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".Solvacamng_popup2"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".VacareqVacationPopup"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".VacareqWaebakPopup"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".VacareqWaechulPopup"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".CalMngPopupActivity"
