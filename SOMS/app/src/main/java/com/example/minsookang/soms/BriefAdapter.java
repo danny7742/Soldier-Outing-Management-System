@@ -2,6 +2,7 @@ package com.example.minsookang.soms;
 
 import android.content.Context;
 
+import android.graphics.Color;
 import android.util.Log;
 
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class BriefAdapter extends BaseAdapter {
     private ArrayList<ChatVO> chatData;
     private LayoutInflater inflater;
     private String id;
+
 
     public BriefAdapter(Context applicationContext, int talklist, ArrayList<ChatVO> list, String id) {
 
@@ -77,18 +79,29 @@ public class BriefAdapter extends BaseAdapter {
 
 //누군지 판별
         if(chatData.get(position).getId().equals(id)){
-            holder.tv_time.setVisibility(View.GONE);
-            holder.tv_name.setVisibility(View.GONE);
-            holder.tv_msg.setVisibility(View.GONE);
-            holder.my_msg.setVisibility(View.VISIBLE);
-            holder.my_time.setVisibility(View.VISIBLE);
-            holder.my_time.setText(chatData.get(position).getTime());
-            holder.my_msg.setText(chatData.get(position).getContent());
+
+               holder.tv_time.setVisibility(View.GONE);
+               holder.tv_name.setVisibility(View.GONE);
+               holder.tv_msg.setVisibility(View.GONE);
+               holder.my_msg.setVisibility(View.VISIBLE);
+            if(chatData.get(position).getCheck()==1){
+               holder.my_msg.setTextColor(Color.BLUE);}
+               else{
+                holder.my_msg.setTextColor(Color.BLACK);
+            }
+               holder.my_time.setVisibility(View.VISIBLE);
+               holder.my_time.setText(chatData.get(position).getTime());
+               holder.my_msg.setText(chatData.get(position).getContent());
         }else{
             holder.tv_time.setVisibility(View.VISIBLE);
             holder.tv_name.setVisibility(View.VISIBLE);
             holder.tv_msg.setVisibility(View.VISIBLE);
             holder.my_msg.setVisibility(View.GONE);
+            if(chatData.get(position).getCheck()==1){
+                holder.my_msg.setTextColor(Color.BLUE);}
+            else{
+                holder.my_msg.setTextColor(Color.BLACK);
+            }
             holder.my_time.setVisibility(View.GONE);
             holder.tv_msg.setText(chatData.get(position).getContent());
             holder.tv_time.setText(chatData.get(position).getTime());
