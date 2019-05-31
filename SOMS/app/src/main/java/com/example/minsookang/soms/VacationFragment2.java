@@ -1,6 +1,7 @@
 package com.example.minsookang.soms;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -25,6 +28,7 @@ import android.widget.TextView;
 public class VacationFragment2 extends ListFragment { // 휴가인원 관리 레이아웃에서 바텀바 "휴가"를 클릭하였을 때 나오는 fragment 코드
     ListViewAdapter adapter2;
     TextView textview;
+    ArrayList<Userinfo> userinfomngList = new ArrayList<Userinfo>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,10 +84,7 @@ public class VacationFragment2 extends ListFragment { // 휴가인원 관리 레
 
         // listview에 들어가는 예시. 나중에 디비연동해야함
         adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "병사 123", "군번1123") ;
-
-        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "병사 2", "군번2") ;
+                "강민수", "15-76089852") ;
 
 
 
@@ -103,6 +104,9 @@ public class VacationFragment2 extends ListFragment { // 휴가인원 관리 레
         String descStr = item.getDesc() ;
         Drawable iconDrawable = item.getIcon() ;
 
+        Intent intent = new Intent(getActivity(), Vacationapprv_popup.class);
+        intent.putExtra("data1", "test");
+        startActivityForResult(intent, 2);
         // TODO : use item data.
     }
 
@@ -118,6 +122,7 @@ public class VacationFragment2 extends ListFragment { // 휴가인원 관리 레
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+
     }
 
     @Override

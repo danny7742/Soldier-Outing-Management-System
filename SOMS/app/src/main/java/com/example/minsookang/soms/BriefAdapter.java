@@ -2,6 +2,7 @@ package com.example.minsookang.soms;
 
 import android.content.Context;
 
+import android.graphics.Color;
 import android.util.Log;
 
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class BriefAdapter extends BaseAdapter {
     private ArrayList<ChatVO> chatData;
     private LayoutInflater inflater;
     private String id;
+
 
     public BriefAdapter(Context applicationContext, int talklist, ArrayList<ChatVO> list, String id) {
 
@@ -77,6 +79,7 @@ public class BriefAdapter extends BaseAdapter {
 
 //누군지 판별
         if(chatData.get(position).getId().equals(id)){
+
             holder.tv_time.setVisibility(View.GONE);
             holder.tv_name.setVisibility(View.GONE);
             holder.tv_msg.setVisibility(View.GONE);
@@ -85,36 +88,30 @@ public class BriefAdapter extends BaseAdapter {
             holder.my_time.setText(chatData.get(position).getTime());
             holder.my_msg.setText(chatData.get(position).getContent());
             holder.my_msg.setBackgroundResource(R.drawable.user_chat);
+
+            if(chatData.get(position).getCheck()==1){
+               holder.my_msg.setTextColor(Color.BLUE);}
+               else{
+                holder.my_msg.setTextColor(Color.BLACK);
+            }
+
         }else{
             holder.tv_time.setVisibility(View.VISIBLE);
             holder.tv_name.setVisibility(View.VISIBLE);
             holder.tv_msg.setVisibility(View.VISIBLE);
             holder.my_msg.setVisibility(View.GONE);
+            if(chatData.get(position).getCheck()==1){
+                holder.my_msg.setTextColor(Color.BLUE);}
+            else{
+                holder.my_msg.setTextColor(Color.BLACK);
+            }
             holder.my_time.setVisibility(View.GONE);
             holder.tv_msg.setText(chatData.get(position).getContent());
             holder.tv_time.setText(chatData.get(position).getTime());
             holder.tv_name.setText(chatData.get(position).getId());
-            holder.my_msg.setBackgroundResource(R.drawable.tv_chat);
+            holder.tv_msg.setBackgroundResource(R.drawable.tv_chat);
         }
 
-
-
-       /* msgText.setBackground(this.getContext().getResources().getDrawable( (message_left ? R.drawable.bubble_b : R.drawable.bubble_a )));
-
-        // 메세지를 번갈아 가면서 좌측,우측으로 출력
-        LinearLayout chatMessageContainer = (LinearLayout)row.findViewById(R.id.chatmessage_container);
-        int align;
-        if(message_left) {
-            align = Gravity.LEFT;
-            message_left = false;
-        }else{
-            align = Gravity.RIGHT;
-            message_left=true;
-        }
-        chatMessageContainer.setGravity(align);
-
-        return row;
-*/
         return convertView;
 
     }
