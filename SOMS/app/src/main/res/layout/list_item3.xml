@@ -31,6 +31,8 @@
                 android:elegantTextHeight="false"
                 android:gravity="left"
                 android:text="이름"
+                android:layout_marginBottom="2dp"
+                android:paddingLeft="4dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#000000"
                 android:textSize="15dp" />
@@ -49,6 +51,7 @@
                     android:layout_weight="1"
                     android:gravity="left"
                     android:text="군번"
+                    android:paddingLeft="4dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#000000"
                     android:textSize="14sp" />
@@ -63,6 +66,7 @@
             android:layout_height="37dp"
             android:layout_gravity="center"
             android:gravity="center"
+            android:background="@drawable/btn_design2"
             android:text="승인"
             android:textSize="10dp" />
 
