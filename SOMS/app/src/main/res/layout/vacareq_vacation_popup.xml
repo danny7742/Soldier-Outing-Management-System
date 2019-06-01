@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="연가 : 21일"
+                android:text="정기휴가 : 21일"
                 android:textColor="#000"
                 android:textAlignment="center"
                  />
@@ -168,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="포상 : 10일"
+                android:text="포상휴가 : 10일"
                 android:textColor="#000"
                 android:textAlignment="center"
                  />
@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="위로 : 14일"
+                android:text="위로휴가 : 14일"
                 android:textColor="#000"
                 android:textAlignment="center"
                 />

@@ -40,6 +40,14 @@ public class VacationRequestActivity extends AppCompatActivity {
             }
         });
 
+        Button checkbutton = (Button) findViewById(R.id.checkbtn);
+        checkbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
+            public void onClick(View v){
+                Intent intent = new Intent(
+                        getApplicationContext(),VacareqCheckPopup.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

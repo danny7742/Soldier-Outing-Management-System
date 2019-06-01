@@ -81,6 +81,9 @@
             android:name=".VacareqWaechulPopup"
             android:theme="@android:style/Theme.Dialog" />
         <activity
+            android:name=".VacareqCheckPopup"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
             android:name=".CalMngPopupActivity"
             android:theme="@android:style/Theme.Dialog" />
         <activity

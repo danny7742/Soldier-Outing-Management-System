@@ -49,8 +49,8 @@
             android:layout_marginBottom="3dp"
             android:alpha="0.87"
             android:gravity="center"
-            android:text="휴가 날짜  :  2018.06.01 ~ 201806.06
-휴가 종류  :  연가 : 3일, 포상 : 3일"
+            android:text="휴가 날짜  :  2019.06.01 ~ 2019.06.06
+휴가 종류  :  정기 : 3일, 포상 : 3일"
             android:textColor="#000"
             android:textSize="15sp" />
     </LinearLayout>

@@ -17,7 +17,7 @@
             android:layout_height="53dp"
             android:background="#ff7a00"
             android:gravity="center"
-            android:text="외박 신청"
+            android:text="외출 신청"
             android:textColor="#fff"
             android:textSize="20sp" />
 
