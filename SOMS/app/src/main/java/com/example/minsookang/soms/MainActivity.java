@@ -32,6 +32,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -53,7 +54,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ImageView stateimage;
-    int state = 1;
+    int state = 1; //병사의 출타 상태
+    int outingstate = 1;
+    String topic;
     String startYear;
     String startMonth;
     String startDay;
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity
     String[] datas;
     String result;
     MaterialCalendarView materialCalendarView;
-    int a=1;
+    int a=0; // 병사인지 지휘관인지?
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+ 
         db.collection("UserInformation")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -92,23 +95,58 @@ public class MainActivity extends AppCompatActivity
                 });
 
 
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+//        FirebaseInstanceId.getInstance().getInstanceId()
+//                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+//                        if (!task.isSuccessful()) {
+//                            Log.w(TAG, "getInstanceId failed", task.getException());
+//                            return;
+//                        }
+//
+//                        // Get new Instance ID token
+//                        String token = task.getResult().getToken();
+//
+//                        // Log and toast
+//                        String msg = getString(R.string.msg_token_fmt, token);
+//                        Log.d(TAG, msg);
+//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
+//        if(outingstate==1)//병사가 휴가중일때
+//        {
+//            if()//오늘이 병사의 휴가 시작날짜일경우
+//            {
+//                topic="startvacation";
+//            }else
+//            {
+//                topic = "null";
+//            }
+//        } else if(outstate==2)//병사가 외박중일때
+//        {
+//            if()//외박 첫날인 경우
+//            {
+//                topic="startbak";
+//            }else if()//외박 마지막 날인경우
+//            {
+//                topic="endbak";
+//            }
+//        } else if(outstate==3)//병사가 외출중일때
+//        {
+//            topic="startchul";
+//        }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("startvacation")/////토픽별로 구독. 푸시알림받음
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = getString(R.string.msg_subscribed);
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
-                            return;
+                            msg = getString(R.string.msg_subscribe_failed);
                         }
-
-                        // Get new Instance ID token
-                        String token = task.getResult().getToken();
-
-                        // Log and toast
-                        String msg = getString(R.string.msg_token_fmt, token);
-                        Log.d(TAG, msg);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
+                        Log.d("vacation message", msg);
+                            }
                 });
 
         stateimage = (ImageView) findViewById(R.id.stateimage);
@@ -350,16 +388,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -397,5 +425,9 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
+    @Override
+    public void onBackPressed() {
+        //안드로이드 백버튼 막기
+        return;
+    }
 }

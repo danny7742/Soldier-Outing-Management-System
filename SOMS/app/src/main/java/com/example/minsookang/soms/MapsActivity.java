@@ -73,6 +73,8 @@ public class MapsActivity extends AppCompatActivity
             .setInterval(UPDATE_INTERVAL_MS)
             .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
+    private String datas;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,10 @@ public class MapsActivity extends AppCompatActivity
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_maps);
 
+
+        Intent data = getIntent();
+        datas = data.getStringExtra("data1");
+        type = Integer.parseInt(datas);
 
         Log.d(TAG, "onCreate");
         mActivity = this;
@@ -224,20 +230,32 @@ public class MapsActivity extends AppCompatActivity
             }
         });
 
-        mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
-        {
+        mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
-            public void onInfoWindowClick (Marker currentMarker){
-                Intent intent = new Intent(getBaseContext(), BriefActivity.class);
+            public void onInfoWindowClick(Marker currentMarker) {
 
                 String address = currentMarker.getTitle();
                 String latlng = currentMarker.getSnippet();
+                Intent intent = new Intent();
+                Log.d("leftbutton test", "leftbutton test");
+                if (type == 2) {
+                    intent.putExtra("address", address);
+                    intent.putExtra("latlng", latlng);
+                }
+                setResult(112, intent);
+                finish();
 
-                intent.putExtra("address", address);
-                intent.putExtra("latlng", latlng);
-                Log.d("dddddddddddddddddddddddddd", address);
 
-                startActivity(intent);
+//                String check = "1";
+//
+//                intent.putExtra("address", address);
+//                intent.putExtra("latlng", latlng);
+//                intent.putExtra("check",check);
+//
+//                Log.d("dddd",latlng);
+//                Log.d("dddddddddddddddddddddddddd", address);
+//
+//                startActivity(intent);
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.minsookang.soms;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
@@ -50,15 +51,21 @@ import java.util.ArrayList;
 
 import java.util.Date;
 
+
+
 public class BriefActivity extends AppCompatActivity {
     ArrayList<ChatVO> list = new ArrayList<>();
     ListView lv;
     Button btn;
     EditText edt;
     public String userid = "강민수";
-    public int userclass = 2;
+    public int userclass = 1;
     String intentid = "조장연";
     String msgname;
+    String msggps = "";
+    public int check = 0;
+    DatabaseReference myRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,12 +82,17 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+
+
+
+
+
         if(userclass ==1)
             msgname = userid + "message";
         else
             msgname = intentid + "message";
 
-        final DatabaseReference myRef = database.getReference(msgname);
+        myRef = database.getReference(msgname);
 
 
 //로그인한 아이디
@@ -92,12 +104,13 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         final BriefAdapter adapter = new BriefAdapter(getApplicationContext(), R.layout.brief_item, list, userid);
         ((ListView) findViewById(R.id.brieflist)).setAdapter(adapter);
 
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (edt.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "내용을 입력하세요.", Toast.LENGTH_LONG).show();
-                } else {
+                }else {
                     Date today = new Date();
                     SimpleDateFormat timeNow = new SimpleDateFormat("a K:mm");
                     StringBuffer sb = new StringBuffer(edt.getText().toString());
@@ -106,11 +119,7 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
                             sb.insert(15 * i, "\n");
                         }
                     }
-
-//list.add(new ChatVO(R.drawable.profile1, id, sb.toString(), timeNow.format(today)));
-//adapter.notifyDataSetChanged();
-
-                    myRef.push().setValue(new ChatVO(userid, sb.toString(), timeNow.format(today)));
+                    myRef.push().setValue(new ChatVO(userid, sb.toString(), timeNow.format(today),0));
                     edt.setText("");
                 }
             }
@@ -146,11 +155,35 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         gpsbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
             public void onClick(View v){
                 Intent intent = new Intent(
-                        getApplicationContext(),BriefActivity.class);///////////////////////클래스 니껄로 바꿔
-                startActivity(intent);
+                        getApplicationContext(),MapsActivity.class);///////////////////////클래스 니껄로 바꿔
+                String data1 = "2";
+                intent.putExtra("data1", data1);
+                startActivityForResult(intent, 2);
+                Log.d("sdfsdfsdf",msggps);
+
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { // 팝업창에서 가지고오는 정보로 실행
+        if(requestCode == 2){
+            if(resultCode == 112){
+
+
+                msggps = data.getStringExtra("address");
+
+                Date today = new Date();
+                SimpleDateFormat timeNow = new SimpleDateFormat("a K:mm");
+                StringBuffer sb = new StringBuffer(msggps);
+                if (sb.length() >= 15) {
+                    for (int i = 1; i <= sb.length() / 15; i++) {
+                        sb.insert(15 * i, "\n");
+                    }}
+                Log.d("aaaaaaa", sb.toString());
+                myRef.push().setValue(new ChatVO(userid, sb.toString(), timeNow.format(today),1));
+                msggps = "";
+            }
+        }}
 }
 
 

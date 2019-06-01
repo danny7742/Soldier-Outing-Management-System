@@ -1,8 +1,6 @@
 package com.example.minsookang.soms;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,26 +10,21 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link VacationFragment.OnFragmentInteractionListener} interface
+ * {@link WaebakFragment2.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link VacationFragment#newInstance} factory method to
+ * Use the {@link WaebakFragment2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class VacationFragment extends ListFragment { // 휴가인원 관리 레이아웃에서 바텀바 "휴가"를 클릭하였을 때 나오는 fragment 코드
-    ListViewAdapter2 adapter;
+public class WaebakFragment2 extends ListFragment { // 휴가인원 관리 레이아웃에서 바텀바 "휴가"를 클릭하였을 때 나오는 fragment 코드
+    ListViewAdapter adapter2;
     TextView textview;
-    ArrayList<Userinfo> userinfomngList = new ArrayList<Userinfo>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,7 +37,7 @@ public class VacationFragment extends ListFragment { // 휴가인원 관리 레�
 
     private OnFragmentInteractionListener mListener;
 
-    public VacationFragment() {
+    public WaebakFragment2() {
         // Required empty public constructor
     }
 
@@ -57,8 +50,8 @@ public class VacationFragment extends ListFragment { // 휴가인원 관리 레�
      * @return A new instance of fragment CallLogFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static VacationFragment newInstance(String param1, String param2) {
-        VacationFragment fragment = new VacationFragment();
+    public static WaebakFragment2 newInstance(String param1, String param2) {
+        WaebakFragment2 fragment = new WaebakFragment2();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -82,27 +75,29 @@ public class VacationFragment extends ListFragment { // 휴가인원 관리 레�
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        adapter = new ListViewAdapter2() ;
-        setListAdapter(adapter) ;
+        adapter2 = new ListViewAdapter() ;
+        setListAdapter(adapter2) ;
 
         // listview에 들어가는 예시. 나중에 디비연동해야함
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "테스트", "15-11111111") ;
+        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
+                "병사 456", "군번1123") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "조장연", "15-76070186") ;
+        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
+                "병사 2", "군번2") ;
 
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "민성재", "15-76073397") ;
+
 
         return super.onCreateView(inflater, container, savedInstanceState);
+
+
+
 
     }
 
     @Override
     public void onListItemClick (ListView l, View v, int position, long id) {
         // get TextView's Text.
-        ListViewItem item = (ListViewItem) l.getItemAtPosition(position);
+        ListViewItem item = (ListViewItem) l.getItemAtPosition(position) ;
 
         String titleStr = item.getTitle() ;
         String descStr = item.getDesc() ;
@@ -112,7 +107,7 @@ public class VacationFragment extends ListFragment { // 휴가인원 관리 레�
     }
 
     public void addItem(Drawable icon, String title, String desc) {
-        adapter.addItem(icon, title, desc) ;
+        adapter2.addItem(icon, title, desc) ;
     }
 
 

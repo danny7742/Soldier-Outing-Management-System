@@ -24,7 +24,9 @@ public class VacationmngActivity extends FragmentActivity {
     private VacationFragment vacationFragment;
     private VacationFragment2 vacationFragment2;
     private WaebakFragment waebakFragment;
+    private WaebakFragment2 waebakFragment2;
     private WaechulFragment waechulFragment;
+    private WaechulFragment2 waechulFragment2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,9 @@ public class VacationmngActivity extends FragmentActivity {
         vacationFragment = new VacationFragment();
         vacationFragment2 = new VacationFragment2();
         waebakFragment = new WaebakFragment();
+        waebakFragment2 = new WaebakFragment2();
         waechulFragment = new WaechulFragment();
+        waechulFragment2 = new WaechulFragment2();
 
 
 
@@ -47,16 +51,22 @@ public class VacationmngActivity extends FragmentActivity {
             public void onTabSelected(@IdRes int tabId){
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
+                FragmentTransaction transaction4 = getSupportFragmentManager().beginTransaction();
+                FragmentTransaction transaction5= getSupportFragmentManager().beginTransaction();
+                FragmentTransaction transaction6 = getSupportFragmentManager().beginTransaction();
 
                 if(tabId == R.id.vacation){
                     transaction.replace(R.id.contentContainer, vacationFragment).commit();
                     transaction2.replace(R.id.contentContainer2, vacationFragment2).commit();
                 }
                 else if(tabId == R.id.waebak){
-                    transaction.replace(R.id.contentContainer, waebakFragment).commit();
+                    transaction3.replace(R.id.contentContainer, waebakFragment).commit();
+                    transaction4.replace(R.id.contentContainer2, waebakFragment2).commit();
                     }
                 else if(tabId == R.id.waechul){
-                    transaction.replace(R.id.contentContainer, waechulFragment).commit();
+                    transaction5.replace(R.id.contentContainer, waechulFragment).commit();
+                    transaction6.replace(R.id.contentContainer2, waechulFragment2).commit();
                 }
             }
 
@@ -77,5 +87,12 @@ public class VacationmngActivity extends FragmentActivity {
         transaction.add(R.id.contentContainer2, vacationFragment2);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(
+                getApplicationContext(),MainActivity.class);
+        startActivity(intent);
     }
 }
