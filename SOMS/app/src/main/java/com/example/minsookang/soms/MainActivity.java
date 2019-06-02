@@ -51,7 +51,13 @@ import static android.support.constraint.Constraints.TAG;
 
 public class MainActivity extends AppCompatActivity
 
+
         implements NavigationView.OnNavigationItemSelectedListener {
+    public static String UserName;
+    public static String SerialNum;
+    public static String TroopCode;
+    public static String UserClass;
+    public static String Password;
 
     ImageView stateimage;
     int state = 1; //병사의 출타 상태
@@ -94,6 +100,19 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
 
+
+        Intent intent = getIntent();
+        UserName = intent.getStringExtra("UserName");
+        SerialNum = intent.getStringExtra("UserSerialNum");
+        TroopCode = intent.getStringExtra("UserTroopCode");
+        UserClass = intent.getStringExtra("UserClass");
+        Password = intent.getStringExtra("UserPassword");
+
+        Log.d("aaaaaaaa", UserName);
+        Log.d("aaaaaaa", SerialNum);
+        Log.d("aaaaaa", TroopCode);
+        Log.d("aaaaa", UserClass);
+        Log.d("aaaa", Password);
 
 //        FirebaseInstanceId.getInstance().getInstanceId()
 //                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -165,7 +184,6 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        Intent intent = getIntent();
         if(intent.getStringExtra("vacplan")!=null) {
             String vacplanresult = intent.getStringExtra("vacplan");
 

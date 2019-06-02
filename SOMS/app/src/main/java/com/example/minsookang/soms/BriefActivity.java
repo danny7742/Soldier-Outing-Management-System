@@ -51,6 +51,11 @@ import java.util.ArrayList;
 
 import java.util.Date;
 
+import static com.example.minsookang.soms.MainActivity.Password;
+import static com.example.minsookang.soms.MainActivity.SerialNum;
+import static com.example.minsookang.soms.MainActivity.TroopCode;
+import static com.example.minsookang.soms.MainActivity.UserClass;
+import static com.example.minsookang.soms.MainActivity.UserName;
 
 
 public class BriefActivity extends AppCompatActivity {
@@ -82,8 +87,11 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
-
+        Log.d("aaaaaaaa", UserName);
+        Log.d("aaaaaaa", SerialNum);
+        Log.d("aaaaaa", TroopCode);
+        Log.d("aaaaa", UserClass);
+        Log.d("aaaa", Password);
 
 
 

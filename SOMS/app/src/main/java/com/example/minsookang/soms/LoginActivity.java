@@ -1,5 +1,6 @@
 package com.example.minsookang.soms;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -53,12 +55,35 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("Soldier").document(serialNum.getText().toString()).get();
-                db.collection("Soldier").document(serialNum.getText().toString()).getFirestore();
-                Log.d("df", "dfd");
 
-                Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent2);
+                DocumentReference docRef = db.collection("Soldier").document(serialNum.getText().toString());
+                final Task<DocumentSnapshot> task = docRef.get();
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot doc) {
+
+                        Log.d("Task", "Task");
+
+                        doc = task.getResult();
+                        Log.d("Doctest", "Doctest");
+                        if(serialNum.getText().toString().equals(doc.get("SerialNum").toString()) && (Password.getText().toString().equals(doc.getString("Password")))){
+                            Log.d("Login Success", "Login Success");
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("UserPassword", doc.getString("Password"));
+                            intent.putExtra("UserSerialNum", doc.get("SerialNum").toString());
+                            intent.putExtra("UserTroopCode", doc.get("TroopCode").toString());
+                            intent.putExtra("UserClass", doc.get("UserClass").toString());
+                            intent.putExtra("UserName", doc.getString("UserName"));
+                            startActivity(intent);
+                        }else if(serialNum.getText().toString().equals(doc.get("SerialNum").toString()) && (Password.getText().toString().equals(doc.getString("Password"))) && doc.getString("Wait").equals(0)){
+                            //로그인 됬는데 허가가 안떨어졌다.
+                        }else{
+                            //로그인 안됬다
+                        }
+                    }
+                });
+
+
             }
         });
     }
