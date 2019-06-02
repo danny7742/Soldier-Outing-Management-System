@@ -2,6 +2,7 @@ package com.example.minsookang.soms;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,36 +14,37 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//import com.amazonaws.mobile.auth.core.IdentityManager;
-//import com.amazonaws.mobile.auth.core.SignInStateChangeListener;
-//import com.amazonaws.mobile.auth.ui.AuthUIConfiguration;
-//import com.amazonaws.mobile.auth.ui.SignInUI;
-//import com.amazonaws.mobile.client.AWSMobileClient;
-//import com.amazonaws.mobile.client.AWSStartupHandler;
-//import com.amazonaws.mobile.client.AWSStartupResult;
-//import com.amazonaws.mobile.config.AWSConfiguration;
-//import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserPool;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 
 public class LoginActivity extends AppCompatActivity {
-    //AWS연동 LoginActivity 구현
+
 
     private Button btnRegist;
     private Button btnLogin;
-    private EditText userName;
+    private EditText serialNum;
+    private EditText Password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        userName = (EditText) findViewById(R.id.nameText);
+        serialNum = (EditText) findViewById(R.id.Serialnum);
+        Password = (EditText) findViewById(R.id.password);
         btnRegist = (Button) findViewById(R.id.btnRegist);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+
         btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
 
                 startActivityForResult(intent, 1000);
             }
@@ -50,6 +52,11 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("Soldier").document(serialNum.getText().toString()).get();
+                db.collection("Soldier").document(serialNum.getText().toString()).getFirestore();
+                Log.d("df", "dfd");
+
                 Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent2);
             }
