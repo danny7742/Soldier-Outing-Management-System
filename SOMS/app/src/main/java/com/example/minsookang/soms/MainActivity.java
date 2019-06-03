@@ -21,6 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import static com.example.minsookang.soms.LoginActivity.SN;
+import static com.example.minsookang.soms.LoginActivity.TC;
+import static com.example.minsookang.soms.LoginActivity.UC;
+import static com.example.minsookang.soms.LoginActivity.UN;
+import static com.example.minsookang.soms.LoginActivity.state;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,18 +55,15 @@ import java.util.concurrent.Executors;
 import com.google.firebase.firestore.FirebaseFirestore;
 import static android.support.constraint.Constraints.TAG;
 
-public class MainActivity extends AppCompatActivity
-
-
-        implements NavigationView.OnNavigationItemSelectedListener {
-    public static String UserName;
-    public static String SerialNum;
-    public static String TroopCode;
-    public static String UserClass;
-    public static String Password;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+//    public static String UserName;
+//    public static String SerialNum;
+//    public static String TroopCode;
+//    public static String UserClass;
+//    public static String Password;
 
     ImageView stateimage;
-    int state = 1; //병사의 출타 상태
+
     int outingstate = 1;
     String topic;
     String startYear;
@@ -101,18 +104,13 @@ public class MainActivity extends AppCompatActivity
                 });
 
 
-        Intent intent = getIntent();
-        UserName = intent.getStringExtra("UserName");
-        SerialNum = intent.getStringExtra("UserSerialNum");
-        TroopCode = intent.getStringExtra("UserTroopCode");
-        UserClass = intent.getStringExtra("UserClass");
-        Password = intent.getStringExtra("UserPassword");
 
-        Log.d("aaaaaaaa", UserName);
-        Log.d("aaaaaaa", SerialNum);
-        Log.d("aaaaaa", TroopCode);
-        Log.d("aaaaa", UserClass);
-        Log.d("aaaa", Password);
+            Log.d("aaaaaaaa", UN);
+            Log.d("aaaaaaa", SN);
+            Log.d("aaaaaa", TC);
+            Log.d("aaaaa", UC);
+            Log.d("aaaaa", state);
+
 
 //        FirebaseInstanceId.getInstance().getInstanceId()
 //                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -182,7 +180,7 @@ public class MainActivity extends AppCompatActivity
                 .commit();
 
 
-
+        Intent intent = getIntent();
 
         if(intent.getStringExtra("vacplan")!=null) {
             String vacplanresult = intent.getStringExtra("vacplan");
@@ -206,8 +204,9 @@ public class MainActivity extends AppCompatActivity
             new ApiSimulator(exhibitdates).executeOnExecutor(Executors.newSingleThreadExecutor());
         }
 
-        switch (state) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
-            case 0: stateimage.setImageResource(R.drawable.yellowheart);
+        int a = Integer.parseInt(state);
+        switch (a) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
+            case 0: stateimage.setImageResource(R.drawable.yellowheart);//출타 X
                 reportbutton.setVisibility(View.GONE);
                 break;
             case 1: stateimage.setImageResource(R.drawable.blueheart);
@@ -246,11 +245,11 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);//////////사용자의 계급에 따라 네비게이션바 메뉴구성 변경
-        if(a==1)
+        if(Integer.parseInt(UC)==0)
         {
+            reportbutton.setText("보고하기");
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.soldier_menu);
-
         }
 
         navigationView.setNavigationItemSelectedListener(this);

@@ -27,6 +27,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static String UN;
+    public static String SN;
+    public static String TC;
+    public static String UC;
+    public static String state;
+
+
 
     private Button btnRegist;
     private Button btnLogin;
@@ -56,24 +63,33 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                DocumentReference docRef = db.collection("Soldier").document(serialNum.getText().toString());
-                final Task<DocumentSnapshot> task = docRef.get();
-                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                final DocumentReference docRef = db.collection("Soldier").document(serialNum.getText().toString());
+                final DocumentReference docRef2 = db.collection("Soldier").document(serialNum.getText().toString()).collection("Vacation").document("State");
+                docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot doc) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                        Log.d("Task", "Task");
+                    }
+                });
 
-                        doc = task.getResult();
-                        Log.d("Doctest", "Doctest");
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot doc = task.getResult();
+
                         if(serialNum.getText().toString().equals(doc.get("SerialNum").toString()) && (Password.getText().toString().equals(doc.getString("Password")))){
                             Log.d("Login Success", "Login Success");
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra("UserPassword", doc.getString("Password"));
-                            intent.putExtra("UserSerialNum", doc.get("SerialNum").toString());
-                            intent.putExtra("UserTroopCode", doc.get("TroopCode").toString());
-                            intent.putExtra("UserClass", doc.get("UserClass").toString());
-                            intent.putExtra("UserName", doc.getString("UserName"));
+                            UN = doc.getString("UserName");
+                            SN = doc.get("SerialNum").toString();
+                            TC = doc.get("TroopCode").toString();
+                            UC = doc.get("UserClass").toString();
+                            state = docRef.collection("Vacation").document("State").get().toString();
+
+//                            intent.putExtra("UserSerialNum", doc.get("SerialNum").toString());
+//                            intent.putExtra("UserTroopCode", doc.get("TroopCode").toString());
+//                            intent.putExtra("UserClass", doc.get("UserClass").toString());
+//                            intent.putExtra("UserName", doc.getString("UserName"));
                             startActivity(intent);
                         }else if(serialNum.getText().toString().equals(doc.get("SerialNum").toString()) && (Password.getText().toString().equals(doc.getString("Password"))) && doc.getString("Wait").equals(0)){
                             //로그인 됬는데 허가가 안떨어졌다.
