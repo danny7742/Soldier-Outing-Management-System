@@ -176,7 +176,7 @@ public class SignUpActivity extends AppCompatActivity {
                     plan.put("planStart", date);
 
 
-
+                    
                     db.collection("Soldier").document(serialNum.getText().toString()).collection("Vacation").document("OutingDate").set(outing);
                     db.collection("Soldier").document(serialNum.getText().toString()).collection("Vacation").document("PlanDate").set(plan);
                     db.collection("Soldier").document(serialNum.getText().toString()).collection("Vacation").document("Remain").set(remain);
@@ -189,6 +189,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (Integer.parseInt(userClass.getText().toString())==1){
                     user.put("Wait",0);
                     db.collection("Manager").document(serialNum.getText().toString()).set(user);
+
                 }
                 if (Integer.parseInt(userClass.getText().toString())==2){
                     String str3 = "1980-01-01";

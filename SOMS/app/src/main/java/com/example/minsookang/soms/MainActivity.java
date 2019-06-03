@@ -197,8 +197,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         Intent intent = getIntent();
+        intent.putExtra("vacplan", "1980_01_01_1980_02_02");
 
-        if(intent.getStringExtra("vacplan")!=null) {
             String vacplanresult = intent.getStringExtra("vacplan");
 
             datas = vacplanresult.split("_");
@@ -218,26 +218,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             Log.d("testming4", exhibitdates[1]);
             new ApiSimulator(exhibitdates).executeOnExecutor(Executors.newSingleThreadExecutor());
-        };
-        switch (Integer.parseInt(OS)) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
-            case 0: {
-                stateimage.setImageResource(R.drawable.yellowheart);//출타 X
-                reportbutton.setVisibility(View.GONE);
-                break;
-            }
-            case 1: {
-                stateimage.setImageResource(R.drawable.blueheart);
-                break;
-            }
-            case 2: {
-                stateimage.setImageResource(R.drawable.greenheart);
-                break;
-            }
-            case 3: {
-                stateimage.setImageResource(R.drawable.pinkheart);
-                break;
-            }
-        }
+
+//        switch (Integer.parseInt(OS)) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
+//            case 0: {
+//                stateimage.setImageResource(R.drawable.yellowheart);//출타 X
+//                reportbutton.setVisibility(View.GONE);
+//                break;
+//            }
+//            case 1: {
+//                stateimage.setImageResource(R.drawable.blueheart);
+//                break;
+//            }
+//            case 2: {
+//                stateimage.setImageResource(R.drawable.greenheart);
+//                break;
+//            }
+//            case 3: {
+//                stateimage.setImageResource(R.drawable.pinkheart);
+//                break;
+//            }
+//        }
 
 
         reportbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
