@@ -191,10 +191,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Button reportbutton = (Button) findViewById(R.id.reportbutton);
         Button vcabutton = (Button) findViewById(R.id.vacbutton);
         TextView classtext = (TextView)findViewById(R.id.text);
+        TextView vacationtext = (TextView)findViewById(R.id.vacationtext);
         if(Integer.parseInt(UC) == 0){
             reportbutton.setText("보고하기");
             vcabutton.setText("휴가계획하기");
             classtext.setText("병사모드");
+            vacationtext.setText("\n정기휴가 :"+ regularVac + "\n포상휴가 : "+ rewardVac + "\n위로휴가 : " + grantVac);
+
         }
 
         materialCalendarView = (MaterialCalendarView)findViewById(R.id.calendarView);
@@ -507,7 +510,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getApplicationContext(),VacationRequestActivity.class);
             startActivity(intent);
         }else if (id == R.id.nav_logout) {
-////////////////여기에 로그아웃 코드!!
+            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(i);
 
 
 

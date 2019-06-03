@@ -19,7 +19,8 @@
             android:gravity="center"
             android:text="휴가 제한 날짜 설정"
             android:textColor="#fff"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:id = "@+id/VacPlan"/>
 
     </LinearLayout>
     <!-- //end 타이틀바 -->

@@ -9,6 +9,11 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Solvacamng_popup2 extends Activity {
         // 병사 휴가관리 창에서 병사를 눌렀을 때 나타나는 팝업창
     int routinVacMng;
@@ -92,6 +97,17 @@ public class Solvacamng_popup2 extends Activity {
     }
 
     public void buttonaccept(View v){  // 설정버튼을 클릭시 작동
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+        //DB에 휴가신청 각각 종류 저장
+        Map<String, Object> vacreqmng = new HashMap<>();
+
+        vacreqmng.put("Regular", Integer.toString(routinVacMng));
+        vacreqmng.put("Reward", Integer.toString(prizeVacMng));
+        vacreqmng.put("Grant", Integer.toString(comfortVacMng));
+        db.collection("Soldier").document("1576089852").collection("Vacation").document("Remain").set(vacreqmng);
+
         Intent intent = new Intent();
         Solvacamng_popup.isChanged = 1;
         intent.putExtra("changedRoutine", routinVacMng);

@@ -19,29 +19,16 @@ public class SoldierVacationMngPermissionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_soldiervacationpermission);
 
         String[] song2 = new String[2];// 리스트뷰 예시 나중에 디비연동해야함
-        song2[0] = "병사 2";
-        song2[1] = "19-34895678";
+        song2[0] = "강민수";
+        song2[1] = "1576089852";
 
-        String[] song3 = new String[2];// 리스트뷰 예시 나중에 디비연동해야함
-        song3[0] = "병사 3";
-        song3[1] = "18-32995633";
-
-        String[] song4 = new String[2];// 리스트뷰 예시 나중에 디비연동해야함
-        song4[0] = "병사 4";
-        song4[1] = "18-75395678";
-
-        String[] song5 = new String[2];// 리스트뷰 예시 나중에 디비연동해야함
-        song5[0] = "병사 5";
-        song5[1] = "19-34823478";
 
         listView = (ListView) findViewById(R.id.listview1);
         adapter = new IconTextListAdapter(this);
         Resources res = getResources();
 
         adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.baseline_child_care_black_18dp),song2));
-        adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.baseline_child_care_black_18dp),song3));
-        adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.baseline_child_care_black_18dp),song4));
-        adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.baseline_child_care_black_18dp),song5));
+
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -61,6 +48,8 @@ public class SoldierVacationMngPermissionActivity extends AppCompatActivity {
         if(requestCode==1){
             if(resultCode==RESULT_OK){
                 //데이터 받기
+                adapter.remove(0);
+                adapter.notifyDataSetChanged();
                 String result = data.getStringExtra("result");
             }
         }

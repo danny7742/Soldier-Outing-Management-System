@@ -102,120 +102,114 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-               if(serialNum.getText().toString().length() == 10) {
-                   DocumentReference docRef = db.collection("Soldier").document(serialNum.getText().toString());
-                   docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                       @Override
-                       public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                           DocumentSnapshot doc = task.getResult();
-                           if (serialNum.getText().toString().equals(doc.get("SerialNum").toString()) && (Password.getText().toString().equals(doc.getString("Password")))) {
-                               Log.d("Login Success", "Login Success");
-                               Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                               UN = doc.getString("UserName");
-                               SN = doc.get("SerialNum").toString();
-                               TC = doc.get("TroopCode").toString();
-                               UC = doc.get("UserClass").toString();
+                if(serialNum.getText().toString().length() == 10) {
+                    DocumentReference docRef = db.collection("Soldier").document(serialNum.getText().toString());
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            DocumentSnapshot doc = task.getResult();
+                            if  ((serialNum.getText().toString().equals(doc.get("SerialNum").toString())) && (Password.getText().toString().equals(doc.getString("Password")))&& (doc.get("Wait").toString().equals("1"))) {
+                                Log.d("Login Success", "Login Success");
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                UN = doc.getString("UserName");
+                                SN = doc.get("SerialNum").toString();
+                                TC = doc.get("TroopCode").toString();
+                                UC = doc.get("UserClass").toString();
 
 //                            intent.putExtra("UserSerialNum", doc.get("SerialNum").toString());
 //                            intent.putExtra("UserTroopCode", doc.get("TroopCode").toString());
 //                            intent.putExtra("UserClass", doc.get("UserClass").toString());
 //                            intent.putExtra("UserName", doc.getString("UserName"));
-                               startActivity(intent);
-                           } else if (serialNum.getText().toString().equals(doc.get("SerialNum").toString()) && (Password.getText().toString().equals(doc.getString("Password"))) && doc.getString("Wait").equals(0)) {
-                               Toast.makeText(LoginActivity.this, "승인허가를 기다려주세요.", Toast.LENGTH_SHORT).show();
-                           } else {
-                               Toast.makeText(LoginActivity.this, "군번과 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
-                           }
-                       }
-                   });
-                   docRef.collection("Vacation").document("Remain").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                       @Override
-                       public void onComplete(@NonNull Task<DocumentSnapshot> task2) {
-                           DocumentSnapshot doc2 = task2.getResult();
-                           regularVac = doc2.get("Regular").toString();
-                           grantVac = doc2.get("Grant").toString();
-                           rewardVac = doc2.get("Reward").toString();
-                           Log.d("Regular", regularVac);
-                       }
-                   });
+                                startActivity(intent);
+                            } else if ((serialNum.getText().toString().equals(doc.get("SerialNum").toString())) && (Password.getText().toString().equals(doc.getString("Password"))) && (doc.get("Wait").toString().equals("0"))) {
+                                Toast.makeText(LoginActivity.this, "승인허가를 기다려주세요.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "군번과 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    docRef.collection("Vacation").document("Remain").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task2) {
+                            DocumentSnapshot doc2 = task2.getResult();
+                            regularVac = doc2.get("Regular").toString();
+                            grantVac = doc2.get("Grant").toString();
+                            rewardVac = doc2.get("Reward").toString();
+                            Log.d("Regular", regularVac);
+                        }
+                    });
 
-                   docRef.collection("Vacation").document("State").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                       @Override
-                       public void onComplete(@NonNull Task<DocumentSnapshot> task3) {
-                           DocumentSnapshot doc3 = task3.getResult();
-                           OS = doc3.get("OutingState").toString();
-                           Log.d("OutingState", OS);
-                       }
-                   });
+                    docRef.collection("Vacation").document("State").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task3) {
+                            DocumentSnapshot doc3 = task3.getResult();
+                            OS = doc3.get("OutingState").toString();
+                            Log.d("OutingState", OS);
+                        }
+                    });
 
 
-               }
+                }
 
-               else if(serialNum.getText().toString().length() == 7){
-                   FirebaseFirestore db = FirebaseFirestore.getInstance();
+                else if(serialNum.getText().toString().length() == 7){
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                   final DocumentReference docRef = db.collection("Commander").document("Info");
+                    final DocumentReference docRef = db.collection("Commander").document("Info");
 
-                   docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                       @Override
-                       public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                           DocumentSnapshot doc = task.getResult();
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            DocumentSnapshot doc = task.getResult();
 
-                           if(serialNum.getText().toString().equals(doc.get("SerialNum").toString()) && (Password.getText().toString().equals(doc.getString("Password")))){
-                               Log.d("Login Success", "Login Success");
-                               Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                               UN = doc.getString("UserName");
-                               SN = doc.get("SerialNum").toString();
-                               TC = doc.get("TroopCode").toString();
-                               UC = doc.get("UserClass").toString();
+                            if(serialNum.getText().toString().equals(doc.get("SerialNum").toString()) && (Password.getText().toString().equals(doc.getString("Password")))){
+                                Log.d("Login Success", "Login Success");
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                UN = doc.getString("UserName");
+                                SN = doc.get("SerialNum").toString();
+                                TC = doc.get("TroopCode").toString();
+                                UC = doc.get("UserClass").toString();
 
-                               //state = docRef.collection("Vacation").document("State").get().toString();
-
-//                            intent.putExtra("UserSerialNum", doc.get("SerialNum").toString());
-//                            intent.putExtra("UserTroopCode", doc.get("TroopCode").toString());
-//                            intent.putExtra("UserClass", doc.get("UserClass").toString());
-//                            intent.putExtra("UserName", doc.getString("UserName"));
-                               startActivity(intent);
-
-                           }
-                           else{
-                               Toast.makeText(LoginActivity.this, "군번과 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
-                           }
-                       }
-                   });
-               }
-               else{
-                   FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-                   final DocumentReference docRef = db.collection("Manager").document("Info");
-
-                   docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                       @Override
-                       public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                           DocumentSnapshot doc = task.getResult();
-
-                           if(serialNum.getText().toString().equals(doc.get("SerialNum").toString()) && (Password.getText().toString().equals(doc.getString("Password")))){
-                               Log.d("Login Success", "Login Success");
-                               Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                               UN = doc.getString("UserName");
-                               SN = doc.get("SerialNum").toString();
-                               TC = doc.get("TroopCode").toString();
-                               UC = doc.get("UserClass").toString();
-                               //state = docRef.collection("Vacation").document("State").get().toString();
+                                //state = docRef.collection("Vacation").document("State").get().toString();
 
 //                            intent.putExtra("UserSerialNum", doc.get("SerialNum").toString());
 //                            intent.putExtra("UserTroopCode", doc.get("TroopCode").toString());
 //                            intent.putExtra("UserClass", doc.get("UserClass").toString());
 //                            intent.putExtra("UserName", doc.getString("UserName"));
-                               startActivity(intent);
-                           }else{
-                               Toast.makeText(LoginActivity.this, "군번과 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
-                           }
-                       }
-                   });
-               }
+                                startActivity(intent);
 
-               }
+                            }
+                            else{
+                                Toast.makeText(LoginActivity.this, "군번과 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+                else{
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                    final DocumentReference docRef = db.collection("Manager").document(serialNum.getText().toString());
+
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            DocumentSnapshot doc = task.getResult();
+
+                            if((serialNum.getText().toString().equals(doc.get("SerialNum").toString())) && (Password.getText().toString().equals(doc.getString("Password")))&& (doc.get("Wait").toString().equals("1"))){
+                                Log.d("Login Success", "Login Success");
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                UN = doc.getString("UserName");
+                                SN = doc.get("SerialNum").toString();
+                                TC = doc.get("TroopCode").toString();
+                                UC = doc.get("UserClass").toString();
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(LoginActivity.this, "군번과 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+
+            }
 
 
 

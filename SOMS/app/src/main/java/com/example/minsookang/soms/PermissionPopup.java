@@ -9,6 +9,11 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class PermissionPopup extends Activity { //병사 관리화면에서 해당 병사를 클릭하였을때 승인/제거 팝업창
 
     private int type;
@@ -29,7 +34,11 @@ public class PermissionPopup extends Activity { //병사 관리화면에서 해�
     }
 
     public void buttonLeft(View v){  // 승인하기 버튼 클릭시 작동
-
+        FirebaseFirestore dbs = FirebaseFirestore.getInstance();
+        Map<String, Object> vacperm = new HashMap<>();
+        vacperm.put("OutingState", 3);
+        dbs.collection("Soldier").document("1576089852").collection("Vacation").document("State").set(vacperm);
+        finish();
     }
 
 

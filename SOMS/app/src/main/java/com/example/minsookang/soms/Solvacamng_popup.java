@@ -11,6 +11,12 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.minsookang.soms.LoginActivity.SN;
 
 
 public class Solvacamng_popup extends Activity {
@@ -61,6 +67,7 @@ public class Solvacamng_popup extends Activity {
 
 
     public void buttonSetting(View v){  // 설정버튼을 클릭시 작동
+
         Intent intent = new Intent(this, Solvacamng_popup2.class);
         intent.putExtra("RoutineVacation", routinVac);
         intent.putExtra("PrizeVacation", prizeVac);

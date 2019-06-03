@@ -25,6 +25,14 @@ import java.util.Map;
 
 import static com.example.minsookang.soms.LoginActivity.SN;
 import static com.example.minsookang.soms.LoginActivity.UC;
+import static com.example.minsookang.soms.LoginActivity.banendYear;
+import static com.example.minsookang.soms.LoginActivity.banstartYear;
+import static com.example.minsookang.soms.LoginActivity.banstartDate;
+import static com.example.minsookang.soms.LoginActivity.banstartMonth;
+import static com.example.minsookang.soms.LoginActivity.banendDate;
+import static com.example.minsookang.soms.LoginActivity.banendMonth;
+import static com.example.minsookang.soms.LoginActivity.banEnd;
+import static com.example.minsookang.soms.LoginActivity.banStart;
 import static com.example.minsookang.soms.MainActivity.outingArrive;
 import static com.example.minsookang.soms.MainActivity.outingStart;
 import static com.example.minsookang.soms.VacareqVacationPopup.usedsGrantVac;
@@ -35,20 +43,16 @@ public class CalMngPopupActivity extends Activity {
     //각종 팝업 관련 Activity 구현 예정
 
     TextView txtText;
-    String banStart;
-    String banEnd;
-    String banstartYear;
-    String banstartMonth;
-    String banstartDate;
-    String banendYear;
-    String banendMonth;
-    String banendDate;
-
+    int testok = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_calmngpopup);
+        if(Integer.parseInt(UC) == 0){
+            TextView VacPlan = findViewById(R.id.VacPlan);
+            VacPlan.setText("휴가 계획하기");
+        }
     }
 
     public void mOnPush(View v){ // 등록하기 버튼 눌렀을 경우
@@ -84,6 +88,7 @@ public class CalMngPopupActivity extends Activity {
                 String[] arriveTime = banEnd.split("_");
                 banstartYear = startTime[0];
                 Log.d("banstartYear", banstartYear);
+
                 banstartMonth = startTime[1];
                 banstartDate = startTime[2];
                 banendYear = arriveTime[0];
@@ -108,10 +113,13 @@ public class CalMngPopupActivity extends Activity {
                 || endDate<0 ){
             Toast.makeText(CalMngPopupActivity.this, "일을 잘못 입력하였습니다.",Toast.LENGTH_SHORT).show();
         }
-//        else if(startDate > Integer.parseInt(banendDate)|| endDate < Integer.parseInt(banstartDate)){
-//            Toast.makeText(CalMngPopupActivity.this, "휴가 제한 날짜와 겹칩니다.",Toast.LENGTH_SHORT).show();
-//            Log.d("banendYear", banendYear);
-//        }
+        if(startDate < Integer.parseInt(banendDate)|| endDate > Integer.parseInt(banstartDate)){
+            Toast.makeText(CalMngPopupActivity.this, "휴가 제한 날짜와 겹칩니다.",Toast.LENGTH_SHORT).show();
+            Log.d("banendYear", banendYear);
+            testok = 0;
+        }
+        else
+            testok = 1;
 
         if(Integer.parseInt(UC)== 2){
             Map<String, Object> banplan = new HashMap<>();
@@ -124,12 +132,13 @@ public class CalMngPopupActivity extends Activity {
         }
 
 
-
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("vacplan", Integer.toString(startYear) +"_"+ Integer.toString(startMonth) +"_" + Integer.toString(startDate)
-                +"_"+ Integer.toString(endYear) +"_"+ Integer.toString(endMonth) +"_"+ Integer.toString(endDate));
-        setResult(RESULT_OK, intent);
-        startActivity(intent);
+        if(testok == 1) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("vacplan", Integer.toString(startYear) + "_" + Integer.toString(startMonth) + "_" + Integer.toString(startDate)
+                    + "_" + Integer.toString(endYear) + "_" + Integer.toString(endMonth) + "_" + Integer.toString(endDate));
+            setResult(RESULT_OK, intent);
+            startActivity(intent);
+        }
         //액티비티(팝업) 닫기
         finish();
     }
