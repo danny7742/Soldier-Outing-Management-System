@@ -11,25 +11,21 @@ import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import java.util.Collection;
 import java.util.HashSet;
 
-import static com.example.minsookang.soms.LoginActivity.UC;
-import static com.example.minsookang.soms.MainActivity.counting;
-
 /**
  * Decorate several days with a dot
  */
-public class EventDecorator implements DayViewDecorator {
+public class EventDecorator2 implements DayViewDecorator {
 
     private final Drawable drawable;
     private int color;
     private HashSet<CalendarDay> dates;
 
-    public EventDecorator(int color, Collection<CalendarDay> dates,Activity context) {
+    public EventDecorator2(int color, Collection<CalendarDay> dates,Activity context) {
 
-            drawable = context.getResources().getDrawable(R.drawable.redx);
-            this.color = color;
-            Log.d("Userclass Commander", "SOldier");
-            this.dates = new HashSet<>(dates);
-
+        drawable = context.getResources().getDrawable(R.drawable.greencheck);
+        Log.d("Userclass SOldier", "SOldier");
+        this.color = color;
+        this.dates = new HashSet<>(dates);
 
     }
 
@@ -41,7 +37,6 @@ public class EventDecorator implements DayViewDecorator {
     @Override
     public void decorate(DayViewFacade view) {
         view.setSelectionDrawable(drawable);
-
         //view.addSpan(new DotSpan(5, color)); // 날자밑에 점
     }
 }

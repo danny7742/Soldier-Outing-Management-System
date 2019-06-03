@@ -26,6 +26,14 @@ import static com.example.minsookang.soms.LoginActivity.TC;
 import static com.example.minsookang.soms.LoginActivity.UC;
 import static com.example.minsookang.soms.LoginActivity.UN;
 import static com.example.minsookang.soms.LoginActivity.OS;
+import static com.example.minsookang.soms.LoginActivity.banEnd;
+import static com.example.minsookang.soms.LoginActivity.banStart;
+import static com.example.minsookang.soms.LoginActivity.banendDate;
+import static com.example.minsookang.soms.LoginActivity.banendMonth;
+import static com.example.minsookang.soms.LoginActivity.banendYear;
+import static com.example.minsookang.soms.LoginActivity.banstartDate;
+import static com.example.minsookang.soms.LoginActivity.banstartMonth;
+import static com.example.minsookang.soms.LoginActivity.banstartYear;
 import static com.example.minsookang.soms.LoginActivity.regularVac;
 import static com.example.minsookang.soms.LoginActivity.grantVac;
 import static com.example.minsookang.soms.LoginActivity.rewardVac;
@@ -65,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static String outingStart;
     public static String planArrive;
     public static String planStart;
-
+    public static int counting = 0;
     ImageView stateimage;
 
     String topic;
@@ -78,8 +86,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ArrayList<Userinfo> userinfoList = new ArrayList<Userinfo>();
     String[] datas;
     String result;
+    String dcolor;
+    String dcolor2;
     MaterialCalendarView materialCalendarView;
-
+    int count = 0;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -198,9 +208,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Intent intent = getIntent();
 
-        if(intent.getStringExtra("vacplan")!=null) {
-            String vacplanresult = intent.getStringExtra("vacplan");
 
+        if(counting == 0) {
+            intent.putExtra("vacplan", banstartYear + "_" + banstartMonth + "_" + banstartDate + "_" + banendYear + "_" + banendMonth + "_" + banendDate);
+            counting++;
+        }
+
+
+        else if(Integer.parseInt(UC) == 0){
+            String vacplanresult = intent.getStringExtra("vacplan");
             datas = vacplanresult.split("_");
             startYear = datas[0];
             startMonth = datas[1];
@@ -211,33 +227,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d(startYear, "mingtest");
 
             String[] exhibitdates = new String[2];
-            exhibitdates[0] = startYear + ',' + startMonth + ',' + startDay;
-            exhibitdates[1] = endYear + ',' + endMonth + ',' + endDay;
+            exhibitdates[0] = startYear + "_" + startMonth + "_" + startDay;
+            exhibitdates[1] = endYear + "_" + endMonth + "_" + endDay;
 
             Log.d("testming3", exhibitdates[0]);
 
             Log.d("testming4", exhibitdates[1]);
-            new ApiSimulator(exhibitdates).executeOnExecutor(Executors.newSingleThreadExecutor());
-        };
-        switch (Integer.parseInt(OS)) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
-            case 0: {
-                stateimage.setImageResource(R.drawable.yellowheart);//출타 X
-                reportbutton.setVisibility(View.GONE);
-                break;
-            }
-            case 1: {
-                stateimage.setImageResource(R.drawable.blueheart);
-                break;
-            }
-            case 2: {
-                stateimage.setImageResource(R.drawable.greenheart);
-                break;
-            }
-            case 3: {
-                stateimage.setImageResource(R.drawable.pinkheart);
-                break;
-            }
+            dcolor = "green";
+            new ApiSimulator(exhibitdates, dcolor).executeOnExecutor(Executors.newSingleThreadExecutor());
         }
+
+        startYear = banstartYear;
+        startMonth = banstartMonth;
+        startDay = banstartDate;
+        endYear = banendYear;
+        endMonth = banendMonth;
+        endDay = banendDate;
+        Log.d(startYear, "mingtest");
+
+        String[] exhibitdates = new String[2];
+        exhibitdates[0] = startYear + "_" + startMonth + "_" + startDay;
+        exhibitdates[1] = endYear + "_" + endMonth + "_" + endDay;
+
+        Log.d("testming7", exhibitdates[0]);
+        Log.d("testming8", exhibitdates[1]);
+        dcolor2 = "red";
+        new ApiSimulator(exhibitdates, dcolor2).executeOnExecutor(Executors.newSingleThreadExecutor());
+//        switch (Integer.parseInt(OS)) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
+//            case 0: {
+//                stateimage.setImageResource(R.drawable.yellowheart);//출타 X
+//                reportbutton.setVisibility(View.GONE);
+//                break;
+//            }
+//            case 1: {
+//                stateimage.setImageResource(R.drawable.blueheart);
+//                break;
+//            }
+//            case 2: {
+//                stateimage.setImageResource(R.drawable.greenheart);
+//                break;
+//            }
+//            case 3: {
+//                stateimage.setImageResource(R.drawable.pinkheart);
+//                break;
+//            }
+//        }
 
 
         reportbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
@@ -285,10 +319,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
 
         String[] Time_Result;
-
-        ApiSimulator(String[] Time_Result){
+        String dcolor;
+        ApiSimulator(String[] Time_Result, String dcolor){
             this.Time_Result = Time_Result;
+            this.dcolor = dcolor;
         }
+
         @Override
         protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
             try {
@@ -315,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //string 문자열인 Time_Result 을 받아와서 ,를 기준으로짜르고 string을 int 로 변환
             for(int i = 0 ; i < Time_Result.length; i ++){
 
-                String[] time = Time_Result[i].split(",");
+                String[] time = Time_Result[i].split("_");
                 exhibitYearRange[i] = Integer.parseInt(time[0]);
                 exhibitMonthRange[i] = Integer.parseInt(time[1]);
                 exhibitDayRange[i] = Integer.parseInt(time[2]);
@@ -411,8 +447,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (isFinishing()) {
                 return;
             }
+            if(Integer.parseInt(UC) == 2 || dcolor == "red") { // 간부일때
+                materialCalendarView.addDecorator(new EventDecorator(Color.RED, calendarDays, MainActivity.this));
+             }
 
-            materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays,MainActivity.this, UC));
+
+            else if(Integer.parseInt(UC) == 0 && dcolor =="green") {
+                materialCalendarView.addDecorator(new EventDecorator2(Color.GREEN, calendarDays, MainActivity.this));
+                Log.d("Counting??", Integer.toString(counting));
+            }
         }
     }
 

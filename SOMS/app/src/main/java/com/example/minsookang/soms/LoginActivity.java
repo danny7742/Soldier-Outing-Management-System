@@ -32,12 +32,22 @@ public class LoginActivity extends AppCompatActivity {
     public static String UN;
     public static String SN;
     public static String TC;
-    public static String UC;
+    public static String UC = "0";
     public static String OS;
     public static String remain;
     public static String regularVac;
     public static String grantVac;
     public static String rewardVac;
+    public static String banStart;
+    public static String banEnd;
+    public static String banstartYear;
+    public static String banstartMonth;
+    public static String banstartDate;
+    public static String banendYear;
+    public static String banendMonth;
+    public static String banendDate;
+
+
 
     private Button btnRegist;
     private Button btnLogin;
@@ -52,6 +62,31 @@ public class LoginActivity extends AppCompatActivity {
         Password = (EditText) findViewById(R.id.password);
         btnRegist = (Button) findViewById(R.id.btnRegist);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference docRef2 = db.collection("Commander").document("Ban");
+
+
+        docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task3) {
+                DocumentSnapshot doc3 = task3.getResult();
+                banStart = doc3.getString("BanStart");
+                banEnd = doc3.getString("BanEnd");
+                String[] startTime = banStart.split("_");
+                String[] arriveTime = banEnd.split("_");
+                banstartYear = startTime[0];
+                Log.d("banstartYear", banstartYear);
+                banstartMonth = startTime[1];
+                banstartDate = startTime[2];
+                banendYear = arriveTime[0];
+                Log.d("banendYear", banendYear);
+                banendMonth = arriveTime[1];
+                banendDate = arriveTime[2];
+            }
+        });
+
 
         btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,10 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                if(serialNum.getText().toString().length() == 10) {
-                   FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-                   final DocumentReference docRef = db.collection("Soldier").document(serialNum.getText().toString());
-
+                   DocumentReference docRef = db.collection("Soldier").document(serialNum.getText().toString());
                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                        @Override
                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -115,6 +147,8 @@ public class LoginActivity extends AppCompatActivity {
                            Log.d("OutingState", OS);
                        }
                    });
+
+
                }
 
                else if(serialNum.getText().toString().length() == 7){
