@@ -57,8 +57,10 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +91,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String dcolor;
     String dcolor2;
     MaterialCalendarView materialCalendarView;
-    int count = 0;
+
+
+    Date mDate;
+    String today = new SimpleDateFormat("yyyyMMdd").format(new Date());
+    long mNow;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -175,17 +181,78 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            topic="startchul";
 //        }
 
-        FirebaseMessaging.getInstance().subscribeToTopic("startvacation")/////토픽별로 구독. 푸시알림받음
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = getString(R.string.msg_subscribed);
-                        if (!task.isSuccessful()) {
-                            msg = getString(R.string.msg_subscribe_failed);
-                        }
-                        Log.d("vacation message", msg);
+
+        if(Integer.parseInt(OS) == 3){
+            if(outingStart == today){
+                Log.d("startvacation message", outingStart);
+                Log.d("startvacation message", today);
+                FirebaseMessaging.getInstance().subscribeToTopic("startvacation")/////토픽별로 구독. 푸시알림받음
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                String msg = getString(R.string.msg_subscribed);
+                                if (!task.isSuccessful()) {
+                                    msg = getString(R.string.msg_subscribe_failed);
+                                }
+                                Log.d("startvacation message", msg);
                             }
-                });
+                        });
+            }
+            else if(outingArrive == today){
+                FirebaseMessaging.getInstance().subscribeToTopic("endvacation")/////토픽별로 구독. 푸시알림받음
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                String msg = getString(R.string.msg_subscribed);
+                                if (!task.isSuccessful()) {
+                                    msg = getString(R.string.msg_subscribe_failed);
+                                }
+                                Log.d("startvacation message", msg);
+                            }
+                        });
+            }
+        }else if(Integer.parseInt(OS) == 2) {
+            if(outingStart == today) {
+                FirebaseMessaging.getInstance().subscribeToTopic("startwaebak")/////토픽별로 구독. 푸시알림받음
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                String msg = getString(R.string.msg_subscribed);
+                                if (!task.isSuccessful()) {
+                                    msg = getString(R.string.msg_subscribe_failed);
+                                }
+                                Log.d("startwaebak message", msg);
+                            }
+                        });
+            }
+            else if(outingArrive == today){
+                FirebaseMessaging.getInstance().subscribeToTopic("endwaebak")/////토픽별로 구독. 푸시알림받음
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                String msg = getString(R.string.msg_subscribed);
+                                if (!task.isSuccessful()) {
+                                    msg = getString(R.string.msg_subscribe_failed);
+                                }
+                                Log.d("endwaebak message", msg);
+                            }
+                        });
+            }
+        }else if(Integer.parseInt(OS) == 1) {
+                FirebaseMessaging.getInstance().subscribeToTopic("waechul")/////토픽별로 구독. 푸시알림받음
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                String msg = getString(R.string.msg_subscribed);
+                                if (!task.isSuccessful()) {
+                                    msg = getString(R.string.msg_subscribe_failed);
+                                }
+                                Log.d("waechul message", msg);
+                            }
+                        });
+        }
+
+
 
         stateimage = (ImageView) findViewById(R.id.stateimage);
         Button reportbutton = (Button) findViewById(R.id.reportbutton);
@@ -255,25 +322,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("testming8", exhibitdates[1]);
         dcolor2 = "red";
         new ApiSimulator(exhibitdates, dcolor2).executeOnExecutor(Executors.newSingleThreadExecutor());
-//        switch (Integer.parseInt(OS)) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
-//            case 0: {
-//                stateimage.setImageResource(R.drawable.yellowheart);//출타 X
-//                reportbutton.setVisibility(View.GONE);
-//                break;
-//            }
-//            case 1: {
-//                stateimage.setImageResource(R.drawable.blueheart);
-//                break;
-//            }
-//            case 2: {
-//                stateimage.setImageResource(R.drawable.greenheart);
-//                break;
-//            }
-//            case 3: {
-//                stateimage.setImageResource(R.drawable.pinkheart);
-//                break;
-//            }
-//        }
+
+        switch (Integer.parseInt(OS)) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
+            case 0: {
+                stateimage.setImageResource(R.drawable.yellowheart);//출타 X
+                reportbutton.setVisibility(View.GONE);
+                break;
+            }
+            case 1: {
+                stateimage.setImageResource(R.drawable.blueheart);
+                reportbutton.setVisibility(View.VISIBLE);
+                break;
+            }
+            case 2: {
+                stateimage.setImageResource(R.drawable.greenheart);
+                reportbutton.setVisibility(View.VISIBLE);
+                break;
+            }
+            case 3: {
+                stateimage.setImageResource(R.drawable.pinkheart);
+                reportbutton.setVisibility(View.VISIBLE);
+                break;
+            }
+        }
 
 
         reportbutton.setOnClickListener(new View.OnClickListener(){ // 보고하기 버튼 눌렀을 경우
@@ -507,11 +578,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getApplicationContext(),VacationRequestActivity.class);
             startActivity(intent);
         }else if (id == R.id.nav_logout) {
-////////////////여기에 로그아웃 코드!!
-
-
-
-
+            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

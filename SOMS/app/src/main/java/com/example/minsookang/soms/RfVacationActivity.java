@@ -11,8 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class RfVacationActivity extends AppCompatActivity {
     String FirstorEnd = null;
@@ -93,6 +96,26 @@ public class RfVacationActivity extends AppCompatActivity {
                 Log.d("testFirstorEnd", numHour);
                 Log.d("testFirstorEnd", numMinute);
                 Log.d("testFirstorEnd", contentReason);
+
+                if(FirstorEnd.equals("출발일")) {
+                    Pushthread myPthread = new Pushthread("startvacation", contentReason);
+                    myPthread.start();
+                    try {
+                        myPthread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }else if(FirstorEnd.equals("복귀일")) {
+                    Pushthread myPthread = new Pushthread("endvacation", contentReason);
+                    myPthread.start();
+                    try {
+                        myPthread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
                 RfVacMngFirstorEnd.add(FirstorEnd);
                 RfVacMngnumHour.add(numHour);
                 RfVacMngnumMinute.add(numMinute);
@@ -122,4 +145,32 @@ public class RfVacationActivity extends AppCompatActivity {
         }
     }
 
+    private class Pushthread extends Thread{
+        private String Topic;
+        private String messagebody;
+        public Pushthread(String Topic , String messagebody){
+            this.Topic = Topic;
+            this.messagebody = messagebody;
+
+        }
+
+        public void run(){
+
+            URL APIEndpoint = null;
+            try {
+                APIEndpoint = new URL("https://pt4k37io35.execute-api.us-east-2.amazonaws.com/SOMS_Pushervice/test?Topic="+this.Topic+"&messagebody="+this.messagebody);
+                HttpsURLConnection myConnection =
+                        (HttpsURLConnection) APIEndpoint.openConnection();
+                myConnection.setRequestMethod("GET");
+                if (myConnection.getResponseCode() == 200) {
+                    Log.d("test","success");
+                } else {
+                    // Error handling code goes here
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }

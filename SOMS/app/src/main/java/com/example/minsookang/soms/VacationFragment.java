@@ -108,6 +108,7 @@ public class VacationFragment extends ListFragment { // 휴가인원 관리 레�
         String descStr = item.getDesc() ;
         Drawable iconDrawable = item.getIcon() ;
 
+
         // TODO : use item data.
     }
 

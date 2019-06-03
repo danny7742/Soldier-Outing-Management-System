@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String SN;
     public static String TC;
     public static String UC = "0";
-    public static String OS;
+    public static String OS = "0";
     public static String remain;
     public static String regularVac;
     public static String grantVac;
