@@ -175,10 +175,13 @@ public class SignUpActivity extends AppCompatActivity {
                     plan.put("planArrive", date);
                     plan.put("planStart", date);
 
+
+
                     db.collection("Soldier").document(serialNum.getText().toString()).collection("Vacation").document("OutingDate").set(outing);
                     db.collection("Soldier").document(serialNum.getText().toString()).collection("Vacation").document("PlanDate").set(plan);
                     db.collection("Soldier").document(serialNum.getText().toString()).collection("Vacation").document("Remain").set(remain);
                     db.collection("Soldier").document(serialNum.getText().toString()).collection("Vacation").document("State").set(state);
+
 
                     db.collection("Commander").document("WaitApproveList").collection("WaitList").document(serialNum.getText().toString()).set(approve);
                 }
@@ -201,14 +204,19 @@ public class SignUpActivity extends AppCompatActivity {
                     ban.put("BanEnd", date1);
                     ban.put("BanStart", date1);
 
+
+
                     Map<String, Object> alarm = new HashMap<>();
                     alarm.put("alarmTime", date1);
                     alarm.put("Content", "알람 시간입니다.");
+                    alarm.put("State", 1);
 
                     db.collection("Commander").document("Info").set(user);
                     db.collection("Commander").document("WaitApproveList");
                     db.collection("Commander").document("Ban").set(ban);
-                    db.collection("Commander").document("Alarm").set(alarm);
+                    db.collection("Commander").document("Alarm").collection("List").document("AlarmList").set(alarm);
+
+
 
                 }
 

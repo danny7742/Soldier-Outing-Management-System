@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d("aaaaaaa", SN);
             Log.d("aaaaaa", TC);
             Log.d("aaaaa", UC);
-            Log.d("aaaaa", state);
+//            Log.d("aaaaa", state);
 
 
 //        FirebaseInstanceId.getInstance().getInstanceId()
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             new ApiSimulator(exhibitdates).executeOnExecutor(Executors.newSingleThreadExecutor());
         }
 
-        int a = Integer.parseInt(state);
+//        int a = Integer.parseInt(state);
         switch (a) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
             case 0: stateimage.setImageResource(R.drawable.yellowheart);//출타 X
                 reportbutton.setVisibility(View.GONE);
