@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.minsookang.soms.MainActivity.outingArrive;
+import static com.example.minsookang.soms.MainActivity.outingStart;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -64,6 +67,9 @@ public class VacareqVacationPopup extends Activity {
         routinTextMng.setText("정기휴가 : " + iregularVac + "일");
         prizeTextMng.setText("포상휴가 : " + irewardVac + "일");
         comfortTextMng.setText("위로휴가 : " + igrantVac + "일");
+
+
+
 
         Button routinMinus = (Button)findViewById(R.id.routinMinusMng);
         routinMinus.setOnClickListener(new View.OnClickListener(){
@@ -125,23 +131,24 @@ public class VacareqVacationPopup extends Activity {
     public void buttonaccept(View v){ // 등록하기 버튼 눌렀을 경우
         //데이터 전달하기
         EditText startYearText = (EditText) findViewById(R.id.startYear) ;
+        EditText startMonthText = (EditText) findViewById(R.id.startMonth) ;
+        EditText startDateText = (EditText) findViewById(R.id.startDate) ;
+        EditText endYearText = (EditText) findViewById(R.id.endYear) ;
+        EditText endMonthText = (EditText) findViewById(R.id.endMonth) ;
+        EditText endDateText = (EditText) findViewById(R.id.endDate) ;
         String strstartYear = startYearText.getText().toString() ; // 각 editText들을 int형으로 가져와서 저장(휴가시작날짜와 복귀날짜를 저장)
         int startYear = Integer.parseInt(strstartYear);
-        EditText startMonthText = (EditText) findViewById(R.id.startMonth) ;
         String strstartMonth = startMonthText.getText().toString() ;
         int startMonth = Integer.parseInt(strstartMonth);
-        EditText startDateText = (EditText) findViewById(R.id.startDate) ;
         String strstartDate = startDateText.getText().toString() ;
         int startDate = Integer.parseInt(strstartDate);
-        EditText endYearText = (EditText) findViewById(R.id.endYear) ;
         String strendYear = endYearText.getText().toString() ;
         int endYear = Integer.parseInt(strendYear);
-        EditText endMonthText = (EditText) findViewById(R.id.endMonth) ;
         String strendMonth = endMonthText.getText().toString() ;
         int endMonth = Integer.parseInt(strendMonth);
-        EditText endDateText = (EditText) findViewById(R.id.endDate) ;
         String strendDate = endDateText.getText().toString() ;
         int endDate = Integer.parseInt(strendDate);
+
 
         if(startYear>3000 || startYear<0 || endYear>3000 || endYear<0){ // editText에 년도, 월, 일을 잘못입력하였을때의 조건
             Toast.makeText(VacareqVacationPopup.this, "년도를 잘못 입력하였습니다.",Toast.LENGTH_SHORT).show();
@@ -172,30 +179,38 @@ public class VacareqVacationPopup extends Activity {
 
         //DB에 휴가신청 각각 종류 저장
         Map<String, Object> vacreqmap = new HashMap<>();
+
+
         vacreqmap.put("Regular", useiregularVac);
         usedsRegularVac = useiregularVac;
-
         db.collection("Soldier").document(SN).collection("Vacation").document("OutingDate").set(vacreqmap);
+
         vacreqmap.put("Reward", useirewardVac);
         usedsRewardVac = useirewardVac;
         db.collection("Soldier").document(SN).collection("Vacation").document("OutingDate").set(vacreqmap);
+
         vacreqmap.put("Grant", useigrantVac);
         usedsGrantVac = useigrantVac;
 
         db.collection("Soldier").document(SN).collection("Vacation").document("OutingDate").set(vacreqmap);
+
+
         vacreqmap.put("OutingStart",Integer.toString(startYear) +"_"+ Integer.toString(startMonth) +"_" + Integer.toString(startDate));
-        sOutingStart = Integer.toString(startYear) +"_"+ Integer.toString(startMonth) +"_" + Integer.toString(startDate);
-
+        outingStart = Integer.toString(startYear) +"_"+ Integer.toString(startMonth) +"_" + Integer.toString(startDate);
         db.collection("Soldier").document(SN).collection("Vacation").document("OutingDate").set(vacreqmap);
+
+
         vacreqmap.put("OutingArrive",Integer.toString(endYear) +"_"+ Integer.toString(endMonth) +"_"+ Integer.toString(endDate));
-        sOutingArrive = Integer.toString(endYear) +"_"+ Integer.toString(endMonth) +"_"+ Integer.toString(endDate);
+        outingArrive = Integer.toString(endYear) +"_"+ Integer.toString(endMonth) +"_"+ Integer.toString(endDate);
         db.collection("Soldier").document(SN).collection("Vacation").document("OutingDate").set(vacreqmap);
 
+        //지휘관에 승인목록대기에 추가
+//        db.collection("Commander").document("WaitApproveList").collection("WaitList").document(SN).
+        intent.putExtra("enroll", 1);
         startActivity(intent);
         //액티비티(팝업) 닫기
         finish();
     }
-
     public void buttonClose(View v){  //닫기 버튼 클릭시 작동
         Intent intent = new Intent();
         intent.putExtra("result", "Close Popup");

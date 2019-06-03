@@ -46,7 +46,7 @@ public class Rfvaca_popup2 extends Activity {
                 intent.putExtra("listnumMinute", getnumMinute);
                 intent.putExtra("listContentReason", getContentReason);
 
-                startActivityForResult(intent, 1);
+                startActivity(intent);
             }
         });
 

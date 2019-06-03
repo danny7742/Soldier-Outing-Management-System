@@ -20,8 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import static com.example.minsookang.soms.LoginActivity.SN;
 import static com.example.minsookang.soms.MainActivity.outingArrive;
 import static com.example.minsookang.soms.MainActivity.outingStart;
-import static com.example.minsookang.soms.VacareqVacationPopup.sOutingArrive;
-import static com.example.minsookang.soms.VacareqVacationPopup.sOutingStart;
 import static com.example.minsookang.soms.VacareqVacationPopup.usedsGrantVac;
 import static com.example.minsookang.soms.VacareqVacationPopup.usedsRegularVac;
 import static com.example.minsookang.soms.VacareqVacationPopup.usedsRewardVac;
@@ -34,9 +32,10 @@ public class VacareqCheckPopup extends Activity {
     int vacEndYear;
     int vacEndMonth;
     int vacEndDate;
-    int usedRegularVac = 0;
-    int usedRewardVac = 0;
-    int usedGrantVac = 0;
+    int usedRegularVac;
+    int usedRewardVac;
+    int usedGrantVac;
+    String enroll = "1";
     String OutingStart;
     String OutingArrive;
     @Override
@@ -46,9 +45,25 @@ public class VacareqCheckPopup extends Activity {
         setContentView(R.layout.vacareq_check_popup);
         Intent intent = getIntent();
         String vacTerm = intent.getStringExtra("vacrequest");
+        TextView contentTerm = (TextView)findViewById(R.id.contentTerm);
 
-        OutingStart = sOutingStart;
-        OutingArrive = sOutingArrive;
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("Soldier").document(SN);
+        docRef.collection("Vacation").document("OutingDate").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task3) {
+                DocumentSnapshot doc3 = task3.getResult();
+                outingArrive = doc3.getString("OutingArrive");
+                outingStart = doc3.getString("OutingStart");
+                usedsRegularVac = Integer.parseInt(doc3.get("Regular").toString());
+                usedsRewardVac = Integer.parseInt(doc3.get("Reward").toString());
+                usedsGrantVac = Integer.parseInt(doc3.get("Grant").toString());
+            }
+        });
+
+
+        OutingStart = outingStart;
+        OutingArrive = outingArrive;
         usedRegularVac = usedsRegularVac;
         usedRewardVac = usedsRewardVac;
         usedGrantVac = usedsGrantVac;
@@ -61,9 +76,25 @@ public class VacareqCheckPopup extends Activity {
         vacEndYear = Integer.parseInt(arriveTime[0]);
         vacEndMonth = Integer.parseInt(arriveTime[1]);
         vacEndDate = Integer.parseInt(arriveTime[2]);
-        TextView contentTerm = (TextView)findViewById(R.id.contentTerm);
-        contentTerm.setText(OutingStart + " ~ " + OutingArrive + "\n" + "정기휴가 : "+ Integer.toString(usedRegularVac) + "\n포상휴가 : "+ Integer.toString(usedRewardVac)
-        + "\n위로휴가 : " + Integer.toString(usedGrantVac));
+
+        contentTerm.setText(OutingStart + " ~ " + OutingArrive + "\n" + "정기휴가 : "+ Integer.toString(usedsRegularVac) + "\n포상휴가 : "+ Integer.toString(usedsRewardVac)
+        + "\n위로휴가 : " + Integer.toString(usedsGrantVac));
+    }
+    public void buttonLeft(View v){
+        Intent intent = new Intent(getApplicationContext(), VacareqVacationPopup.class);
+        intent.putExtra("startYear", Integer.toString(vacStartYear));
+        intent.putExtra("startMonth", Integer.toString(vacStartMonth));
+        intent.putExtra("startDate", Integer.toString(vacStartDate));
+        intent.putExtra("endYear", Integer.toString(vacEndYear));
+        intent.putExtra("endMonth", Integer.toString(vacEndMonth));
+        intent.putExtra("endDate", Integer.toString(vacEndDate));
+
+        startActivity(intent);
+        finish();
+    }
+
+    public void buttonCenter(View v){
+
     }
 
     public void buttonRight(View v){  //닫기 버튼 클릭시 작동
