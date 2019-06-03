@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import static com.example.minsookang.soms.LoginActivity.UC;
+import static com.example.minsookang.soms.LoginActivity.UN;
 
 import android.os.Bundle;
 
@@ -63,7 +65,7 @@ public class BriefActivity extends AppCompatActivity {
     ListView lv;
     Button btn;
     EditText edt;
-    public String userid = "강민수";
+
     public int userclass = 1;
     String intentid = "조장연";
     String msgname;
@@ -87,30 +89,23 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-//
-//        Log.d("aaaaaaaa", UserName);
-//        Log.d("aaaaaaa", SerialNum);
-//        Log.d("aaaaaa", TroopCode);
-//        Log.d("aaaaa", UserClass);
-//        Log.d("aaaa", Password);
 
+        Intent intent = getIntent();
+        intentid = intent.getExtras().getString("name");
+
+        Log.d("asdf", intentid);
         Log.d("aaaa", "test");
 
-        if(userclass ==1)
-            msgname = userid + "message";
+        if(Integer.parseInt(UC) == 0)
+            msgname = UN + "message";
         else
             msgname = intentid + "message";
 
         myRef = database.getReference(msgname);
 
 
-//로그인한 아이디
-        // id =
-//lv.setAdapter(adapter);
 
-//list.add(new ChatVO(R.drawable.profile3, "찡찡이", "안녕", "오후 4:42"));
-
-        final BriefAdapter adapter = new BriefAdapter(getApplicationContext(), R.layout.brief_item, list, userid);
+        final BriefAdapter adapter = new BriefAdapter(getApplicationContext(), R.layout.brief_item, list, UN);
         ((ListView) findViewById(R.id.brieflist)).setAdapter(adapter);
 
 
@@ -128,7 +123,7 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
                             sb.insert(15 * i, "\n");
                         }
                     }
-                    myRef.push().setValue(new ChatVO(userid, sb.toString(), timeNow.format(today),0));
+                    myRef.push().setValue(new ChatVO(UN, sb.toString(), timeNow.format(today),0));
                     edt.setText("");
                 }
             }
@@ -189,7 +184,7 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
                         sb.insert(15 * i, "\n");
                     }}
                 Log.d("aaaaaaa", sb.toString());
-                myRef.push().setValue(new ChatVO(userid, sb.toString(), timeNow.format(today),1));
+                myRef.push().setValue(new ChatVO(UN, sb.toString(), timeNow.format(today),1));
                 msggps = "";
             }
         }}
