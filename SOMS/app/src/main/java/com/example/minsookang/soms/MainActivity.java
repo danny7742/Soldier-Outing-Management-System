@@ -208,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Intent intent = getIntent();
 
-
         if(counting == 0) {
             intent.putExtra("vacplan", banstartYear + "_" + banstartMonth + "_" + banstartDate + "_" + banendYear + "_" + banendMonth + "_" + banendDate);
             counting++;
@@ -233,9 +232,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d("testming3", exhibitdates[0]);
 
             Log.d("testming4", exhibitdates[1]);
+
             dcolor = "green";
             new ApiSimulator(exhibitdates, dcolor).executeOnExecutor(Executors.newSingleThreadExecutor());
         }
+
+        reportbutton.setVisibility(View.GONE);
 
         startYear = banstartYear;
         startMonth = banstartMonth;
