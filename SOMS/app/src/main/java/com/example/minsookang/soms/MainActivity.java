@@ -25,7 +25,11 @@ import static com.example.minsookang.soms.LoginActivity.SN;
 import static com.example.minsookang.soms.LoginActivity.TC;
 import static com.example.minsookang.soms.LoginActivity.UC;
 import static com.example.minsookang.soms.LoginActivity.UN;
-import static com.example.minsookang.soms.LoginActivity.state;
+import static com.example.minsookang.soms.LoginActivity.OS;
+import static com.example.minsookang.soms.LoginActivity.regularVac;
+import static com.example.minsookang.soms.LoginActivity.grantVac;
+import static com.example.minsookang.soms.LoginActivity.rewardVac;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -57,14 +61,13 @@ import static android.support.constraint.Constraints.TAG;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 //    public static String UserName;
-//    public static String SerialNum;
-//    public static String TroopCode;
-//    public static String UserClass;
-//    public static String Password;
+    public static String outingArrive;
+    public static String outingStart;
+    public static String planArrive;
+    public static String planStart;
 
     ImageView stateimage;
 
-    int outingstate = 1;
     String topic;
     String startYear;
     String startMonth;
@@ -76,10 +79,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String[] datas;
     String result;
     MaterialCalendarView materialCalendarView;
-    int a=0; // 병사인지 지휘관인지?
+
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,29 +89,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
- 
-        db.collection("UserInformation")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Log.d("Main SN", SN);
+        DocumentReference docRef = db.collection("Soldier").document(SN);
+        if(Integer.parseInt(UC) == 0) {
+            docRef.collection("Vacation").document("OutingDate").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task3) {
+                    DocumentSnapshot doc3 = task3.getResult();
+                    outingArrive = doc3.getString("OutingArrive");
+                    outingStart = doc3.getString("OutingStart");
 
+                    Log.d("OutingStart", outingArrive);
+                    Log.d("OutingArrive", outingStart);
+                }
+            });
+            docRef.collection("Vacation").document("PlanDate").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task2) {
+                    DocumentSnapshot doc2 = task2.getResult();
 
-            Log.d("aaaaaaaa", UN);
-            Log.d("aaaaaaa", SN);
-            Log.d("aaaaaa", TC);
-            Log.d("aaaaa", UC);
-//            Log.d("aaaaa", state);
+                    planArrive = doc2.getString("planArrive");
+                    planStart = doc2.getString("planStart");
+                    Log.d("planArrive", planArrive);
+                    Log.d("planStart", planStart);
+                }
+            });
+        }
+        //Username = UC
+        //SerialNum = SN
+        //TroopCode = TC
+        //Userclass = UC
 
 
 //        FirebaseInstanceId.getInstance().getInstanceId()
@@ -169,7 +180,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         stateimage = (ImageView) findViewById(R.id.stateimage);
         Button reportbutton = (Button) findViewById(R.id.reportbutton);
         Button vcabutton = (Button) findViewById(R.id.vacbutton);
-
+        TextView classtext = (TextView)findViewById(R.id.text);
+        if(Integer.parseInt(UC) == 0){
+            reportbutton.setText("보고하기");
+            vcabutton.setText("휴가계획하기");
+            classtext.setText("병사모드");
+        }
 
         materialCalendarView = (MaterialCalendarView)findViewById(R.id.calendarView);
         materialCalendarView.state().edit()
@@ -202,19 +218,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             Log.d("testming4", exhibitdates[1]);
             new ApiSimulator(exhibitdates).executeOnExecutor(Executors.newSingleThreadExecutor());
-        }
-
-//        int a = Integer.parseInt(state);
-        switch (a) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
-            case 0: stateimage.setImageResource(R.drawable.yellowheart);//출타 X
+        };
+        switch (Integer.parseInt(OS)) {  // 병사의 상태에 따라 레이아웃이 바뀜(현재는 병사의 상태를 나타내는 하트색이 바뀌고 출타중이 아닐시 보고하기버튼 X)
+            case 0: {
+                stateimage.setImageResource(R.drawable.yellowheart);//출타 X
                 reportbutton.setVisibility(View.GONE);
                 break;
-            case 1: stateimage.setImageResource(R.drawable.blueheart);
+            }
+            case 1: {
+                stateimage.setImageResource(R.drawable.blueheart);
                 break;
-            case 2: stateimage.setImageResource(R.drawable.greenheart);
+            }
+            case 2: {
+                stateimage.setImageResource(R.drawable.greenheart);
                 break;
-            case 3: stateimage.setImageResource(R.drawable.pinkheart);
+            }
+            case 3: {
+                stateimage.setImageResource(R.drawable.pinkheart);
                 break;
+            }
         }
 
 
@@ -247,12 +269,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);//////////사용자의 계급에 따라 네비게이션바 메뉴구성 변경
         if(Integer.parseInt(UC)==0)
         {
-            reportbutton.setText("보고하기");
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.soldier_menu);
         }
 
         navigationView.setNavigationItemSelectedListener(this);
+        View nav_header_view = navigationView.getHeaderView(0);
+
+        TextView nav_header_id_text = (TextView) nav_header_view.findViewById(R.id.userid);
+        nav_header_id_text.setText(SN);
+        TextView nav_header_id_text2 = (TextView) nav_header_view.findViewById(R.id.username);
+        nav_header_id_text2.setText(UN);
     }
 
     private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
@@ -385,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return;
             }
 
-            materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays,MainActivity.this));
+            materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays,MainActivity.this, UC));
         }
     }
 
@@ -411,7 +438,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) { // 네비게이션바에서 눌렀을 때 각각의 항목 레이아웃으로 들어가는거
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_userMng) {
             Intent intent = new Intent(
                     getApplicationContext(),UsermngActivity.class);
@@ -435,6 +461,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(
                     getApplicationContext(),VacationRequestActivity.class);
             startActivity(intent);
+        }else if (id == R.id.nav_logout) {
+////////////////여기에 로그아웃 코드!!
+
+
+
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

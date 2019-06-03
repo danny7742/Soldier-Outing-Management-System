@@ -43,7 +43,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/popupText2"
+            android:id="@+id/contentTerm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="3dp"

@@ -12,12 +12,35 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.minsookang.soms.LoginActivity.SN;
+import static com.example.minsookang.soms.LoginActivity.regularVac;
+import static com.example.minsookang.soms.LoginActivity.grantVac;
+import static com.example.minsookang.soms.LoginActivity.rewardVac;
+
+
 public class VacareqVacationPopup extends Activity {
     // 병사 출타 신청 화면에서 휴가버튼 눌렀을 때
+    public static int usedsRegularVac;
+    public static int usedsRewardVac;
+    public static int usedsGrantVac;
+    public static String sOutingStart;
+    public static String sOutingArrive;
+    int iregularVac;
+    int igrantVac;
+    int irewardVac;
+    int tmpiregularVac;
+    int tmpigrantVac;
+    int tmpirewardVac;
 
-    int routinVacMng;
-    int prizeVacMng;
-    int comfortVacMng;
+    int useiregularVac;
+    int useigrantVac;
+    int useirewardVac;
+
     TextView routinTextMng;
     TextView prizeTextMng;
     TextView comfortTextMng;
@@ -30,59 +53,63 @@ public class VacareqVacationPopup extends Activity {
         prizeTextMng = (TextView)findViewById(R.id.prizeVacationMng);
         comfortTextMng = (TextView)findViewById(R.id.comfortVacationMng);
         //여기서 병사별 휴가 보유현황 DB에서 가져오기.
-        routinVacMng = 21;
-        prizeVacMng = 4;
-        comfortVacMng = 3;
+        iregularVac = Integer.parseInt(regularVac);
+        igrantVac = Integer.parseInt(grantVac);
+        irewardVac = Integer.parseInt(rewardVac);
 
-        routinTextMng.setText("정기휴가 : " + routinVacMng + "일");
-        prizeTextMng.setText("포상휴가 : " + prizeVacMng + "일");
-        comfortTextMng.setText("위로휴가 : " + comfortVacMng + "일");
+        tmpiregularVac = Integer.parseInt(regularVac);
+        tmpigrantVac = Integer.parseInt(grantVac);
+        tmpirewardVac = Integer.parseInt(rewardVac);
+
+        routinTextMng.setText("정기휴가 : " + iregularVac + "일");
+        prizeTextMng.setText("포상휴가 : " + irewardVac + "일");
+        comfortTextMng.setText("위로휴가 : " + igrantVac + "일");
 
         Button routinMinus = (Button)findViewById(R.id.routinMinusMng);
         routinMinus.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                routinVacMng--;
-                routinTextMng.setText("정기휴가 : " + routinVacMng + "일");
+                iregularVac--;
+                routinTextMng.setText("정기휴가 : " + iregularVac + "일");
             }
         });
 
         Button routinPlus = (Button)findViewById(R.id.routinPlusMng);
         routinPlus.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                routinVacMng++;
-                routinTextMng.setText("정기휴가 : " + routinVacMng + "일");
+                iregularVac++;
+                routinTextMng.setText("정기휴가 : " + iregularVac + "일");
             }
         });
 
         Button prizeMinus = (Button)findViewById(R.id.prizeMinusMng);
         prizeMinus.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                prizeVacMng--;
-                prizeTextMng.setText("포상휴가 : " + prizeVacMng + "일");
+                irewardVac--;
+                prizeTextMng.setText("포상휴가 : " + irewardVac + "일");
             }
         });
 
         Button prizePlus = (Button)findViewById(R.id.prizePlusMng);
         prizePlus.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                prizeVacMng++;
-                prizeTextMng.setText("포상휴가 : " + prizeVacMng + "일");
+                irewardVac++;
+                prizeTextMng.setText("포상휴가 : " + irewardVac + "일");
             }
         });
 
         Button comfortMinus = (Button)findViewById(R.id.comfortMinusMng);
         comfortMinus.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                comfortVacMng--;
-                comfortTextMng.setText("위로휴가 : " + comfortVacMng + "일");
+                igrantVac--;
+                comfortTextMng.setText("위로휴가 : " + igrantVac + "일");
             }
         });
 
         Button comfortPlus = (Button)findViewById(R.id.comfortPlusMng);
         comfortPlus.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                comfortVacMng++;
-                comfortTextMng.setText("위로휴가 : " + comfortVacMng + "일");
+                igrantVac++;
+                comfortTextMng.setText("위로휴가 : " + igrantVac + "일");
             }
         });
 //
@@ -135,11 +162,36 @@ public class VacareqVacationPopup extends Activity {
 
 
         Intent intent = new Intent(getApplicationContext(), VacareqCheckPopup.class);
-        intent.putExtra("vacrequest", startYear +"_"+ startMonth +"_" + startDate +"_"+ endYear +"_"+ endMonth +"_"+ endDate);
-        setResult(RESULT_OK, intent);
-        startActivity(intent);
-//        Log.d("VacReq", "VacReq");
+        useiregularVac = tmpiregularVac - iregularVac;
+        useirewardVac = tmpirewardVac - irewardVac;
+        useigrantVac = tmpigrantVac - igrantVac;
 
+        setResult(RESULT_OK, intent);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+        //DB에 휴가신청 각각 종류 저장
+        Map<String, Object> vacreqmap = new HashMap<>();
+        vacreqmap.put("Regular", useiregularVac);
+        usedsRegularVac = useiregularVac;
+
+        db.collection("Soldier").document(SN).collection("Vacation").document("OutingDate").set(vacreqmap);
+        vacreqmap.put("Reward", useirewardVac);
+        usedsRewardVac = useirewardVac;
+        db.collection("Soldier").document(SN).collection("Vacation").document("OutingDate").set(vacreqmap);
+        vacreqmap.put("Grant", useigrantVac);
+        usedsGrantVac = useigrantVac;
+
+        db.collection("Soldier").document(SN).collection("Vacation").document("OutingDate").set(vacreqmap);
+        vacreqmap.put("OutingStart",Integer.toString(startYear) +"_"+ Integer.toString(startMonth) +"_" + Integer.toString(startDate));
+        sOutingStart = Integer.toString(startYear) +"_"+ Integer.toString(startMonth) +"_" + Integer.toString(startDate);
+
+        db.collection("Soldier").document(SN).collection("Vacation").document("OutingDate").set(vacreqmap);
+        vacreqmap.put("OutingArrive",Integer.toString(endYear) +"_"+ Integer.toString(endMonth) +"_"+ Integer.toString(endDate));
+        sOutingArrive = Integer.toString(endYear) +"_"+ Integer.toString(endMonth) +"_"+ Integer.toString(endDate);
+        db.collection("Soldier").document(SN).collection("Vacation").document("OutingDate").set(vacreqmap);
+
+        startActivity(intent);
         //액티비티(팝업) 닫기
         finish();
     }
