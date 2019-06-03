@@ -378,6 +378,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.soldier_menu);
+        }else if(Integer.parseInt(UC)==1)
+        {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.gan_menu);
         }
 
         navigationView.setNavigationItemSelectedListener(this);

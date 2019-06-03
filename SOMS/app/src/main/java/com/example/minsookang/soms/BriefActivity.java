@@ -90,7 +90,10 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        Intent intent = getIntent();
+        intentid = intent.getExtras().getString("name");
 
+        Log.d("asdf", intentid);
         Log.d("aaaa", "test");
 
         if(Integer.parseInt(UC) == 0)

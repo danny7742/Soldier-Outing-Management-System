@@ -108,7 +108,9 @@ public class VacationFragment extends ListFragment { // 휴가인원 관리 레�
         String descStr = item.getDesc() ;
         Drawable iconDrawable = item.getIcon() ;
 
-
+        Intent intent = new Intent(getActivity(), BriefActivity.class);
+        intent.putExtra("name", titleStr);
+        startActivity(intent);
         // TODO : use item data.
     }
 
