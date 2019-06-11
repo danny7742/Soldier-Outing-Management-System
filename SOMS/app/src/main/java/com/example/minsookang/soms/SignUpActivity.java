@@ -159,21 +159,15 @@ public class SignUpActivity extends AppCompatActivity {
                     state.put("OutingState", 0);
 
                     Map<String, Object> outing = new HashMap<>();
-                    String str1 = "1980-01-01";
-                    Date date = null;
-                    try {
-                        date = new SimpleDateFormat("yyyy-MM-dd").parse(str1);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    String str2 = new SimpleDateFormat("yyyy-MM-dd").format(date);
+                    String str1 = "1980_01_01";
 
-                    outing.put("OutingArrive", date);
-                    outing.put("OutingStart", date);
+
+                    outing.put("OutingArrive", str1);
+                    outing.put("OutingStart", str1);
 
                     Map<String, Object> plan = new HashMap<>();
-                    plan.put("planArrive", date);
-                    plan.put("planStart", date);
+                    plan.put("planArrive", str1);
+                    plan.put("planStart", str1);
 
 
 
@@ -191,23 +185,17 @@ public class SignUpActivity extends AppCompatActivity {
                     db.collection("Manager").document(serialNum.getText().toString()).set(user);
                 }
                 if (Integer.parseInt(userClass.getText().toString())==2){
-                    String str3 = "1980-01-01";
-                    Date date1 = null;
-                    try {
-                        date1 = new SimpleDateFormat("yyyy-MM-dd").parse(str3);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    String str2 = "1980_01_01";
 
 
                     Map<String, Object> ban = new HashMap<>();
-                    ban.put("BanEnd", date1);
-                    ban.put("BanStart", date1);
+                    ban.put("BanEnd", str2);
+                    ban.put("BanStart", str2);
 
 
 
                     Map<String, Object> alarm = new HashMap<>();
-                    alarm.put("alarmTime", date1);
+                    alarm.put("alarmTime", str2);
                     alarm.put("Content", "알람 시간입니다.");
                     alarm.put("State", 1);
 

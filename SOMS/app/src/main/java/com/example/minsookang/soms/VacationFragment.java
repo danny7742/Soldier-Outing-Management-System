@@ -87,13 +87,13 @@ public class VacationFragment extends ListFragment { // 휴가인원 관리 레�
 
         // listview에 들어가는 예시. 나중에 디비연동해야함
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "테스트", "15-11111111") ;
+                "강민수", "1576089852") ;
 
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "조장연", "15-76070186") ;
+                "조장연", "1576070186") ;
 
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "민성재", "15-76073397") ;
+                "민성재", "1576073397") ;
 
         return super.onCreateView(inflater, container, savedInstanceState);
 

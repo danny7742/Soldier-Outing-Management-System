@@ -113,7 +113,7 @@ public class CalMngPopupActivity extends Activity {
                 || endDate<0 ){
             Toast.makeText(CalMngPopupActivity.this, "일을 잘못 입력하였습니다.",Toast.LENGTH_SHORT).show();
         }
-        if(startDate < Integer.parseInt(banendDate)|| endDate > Integer.parseInt(banstartDate)){
+        if(startDate < Integer.parseInt(banendDate)){
             Toast.makeText(CalMngPopupActivity.this, "휴가 제한 날짜와 겹칩니다.",Toast.LENGTH_SHORT).show();
             Log.d("banendYear", banendYear);
             testok = 0;

@@ -180,77 +180,87 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        {
 //            topic="startchul";
 //        }
+        FirebaseMessaging.getInstance().subscribeToTopic("startvacation")/////토픽별로 구독. 푸시알림받음
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = getString(R.string.msg_subscribed);
+                        if (!task.isSuccessful()) {
+                            msg = getString(R.string.msg_subscribe_failed);
+                        }
+                        Log.d("startvacation message", msg);
+                    }
+                });
 
-
-        if(Integer.parseInt(OS) == 3){
-            if(outingStart == today){
-                Log.d("startvacation message", outingStart);
-                Log.d("startvacation message", today);
-                FirebaseMessaging.getInstance().subscribeToTopic("startvacation")/////토픽별로 구독. 푸시알림받음
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                String msg = getString(R.string.msg_subscribed);
-                                if (!task.isSuccessful()) {
-                                    msg = getString(R.string.msg_subscribe_failed);
-                                }
-                                Log.d("startvacation message", msg);
-                            }
-                        });
-            }
-            else if(outingArrive == today){
-                FirebaseMessaging.getInstance().subscribeToTopic("endvacation")/////토픽별로 구독. 푸시알림받음
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                String msg = getString(R.string.msg_subscribed);
-                                if (!task.isSuccessful()) {
-                                    msg = getString(R.string.msg_subscribe_failed);
-                                }
-                                Log.d("startvacation message", msg);
-                            }
-                        });
-            }
-        }else if(Integer.parseInt(OS) == 2) {
-            if(outingStart == today) {
-                FirebaseMessaging.getInstance().subscribeToTopic("startwaebak")/////토픽별로 구독. 푸시알림받음
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                String msg = getString(R.string.msg_subscribed);
-                                if (!task.isSuccessful()) {
-                                    msg = getString(R.string.msg_subscribe_failed);
-                                }
-                                Log.d("startwaebak message", msg);
-                            }
-                        });
-            }
-            else if(outingArrive == today){
-                FirebaseMessaging.getInstance().subscribeToTopic("endwaebak")/////토픽별로 구독. 푸시알림받음
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                String msg = getString(R.string.msg_subscribed);
-                                if (!task.isSuccessful()) {
-                                    msg = getString(R.string.msg_subscribe_failed);
-                                }
-                                Log.d("endwaebak message", msg);
-                            }
-                        });
-            }
-        }else if(Integer.parseInt(OS) == 1) {
-                FirebaseMessaging.getInstance().subscribeToTopic("waechul")/////토픽별로 구독. 푸시알림받음
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                String msg = getString(R.string.msg_subscribed);
-                                if (!task.isSuccessful()) {
-                                    msg = getString(R.string.msg_subscribe_failed);
-                                }
-                                Log.d("waechul message", msg);
-                            }
-                        });
-        }
+//        if(Integer.parseInt(OS) == 3){
+//            if(outingStart == today){
+//                Log.d("startvacation message", outingStart);
+//                Log.d("startvacation message", today);
+//                FirebaseMessaging.getInstance().subscribeToTopic("startvacation")/////토픽별로 구독. 푸시알림받음
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                String msg = getString(R.string.msg_subscribed);
+//                                if (!task.isSuccessful()) {
+//                                    msg = getString(R.string.msg_subscribe_failed);
+//                                }
+//                                Log.d("startvacation message", msg);
+//                            }
+//                        });
+//            }
+//            else if(outingArrive == today){
+//                FirebaseMessaging.getInstance().subscribeToTopic("endvacation")/////토픽별로 구독. 푸시알림받음
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                String msg = getString(R.string.msg_subscribed);
+//                                if (!task.isSuccessful()) {
+//                                    msg = getString(R.string.msg_subscribe_failed);
+//                                }
+//                                Log.d("startvacation message", msg);
+//                            }
+//                        });
+//            }
+//        }else if(Integer.parseInt(OS) == 2) {
+//            if(outingStart == today) {
+//                FirebaseMessaging.getInstance().subscribeToTopic("startwaebak")/////토픽별로 구독. 푸시알림받음
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                String msg = getString(R.string.msg_subscribed);
+//                                if (!task.isSuccessful()) {
+//                                    msg = getString(R.string.msg_subscribe_failed);
+//                                }
+//                                Log.d("startwaebak message", msg);
+//                            }
+//                        });
+//            }
+//            else if(outingArrive == today){
+//                FirebaseMessaging.getInstance().subscribeToTopic("endwaebak")/////토픽별로 구독. 푸시알림받음
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                String msg = getString(R.string.msg_subscribed);
+//                                if (!task.isSuccessful()) {
+//                                    msg = getString(R.string.msg_subscribe_failed);
+//                                }
+//                                Log.d("endwaebak message", msg);
+//                            }
+//                        });
+//            }
+//        }else if(Integer.parseInt(OS) == 1) {
+//                FirebaseMessaging.getInstance().subscribeToTopic("waechul")/////토픽별로 구독. 푸시알림받음
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                String msg = getString(R.string.msg_subscribed);
+//                                if (!task.isSuccessful()) {
+//                                    msg = getString(R.string.msg_subscribe_failed);
+//                                }
+//                                Log.d("waechul message", msg);
+//                            }
+//                        });
+//        }
 
 
 

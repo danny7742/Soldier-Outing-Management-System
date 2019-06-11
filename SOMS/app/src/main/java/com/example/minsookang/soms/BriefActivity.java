@@ -67,7 +67,7 @@ public class BriefActivity extends AppCompatActivity {
     EditText edt;
 
     public int userclass = 1;
-    String intentid = "조장연";
+    String intentid = "강민수";
     String msgname;
     String msggps = "";
     public int check = 0;
@@ -90,8 +90,8 @@ ArrayAdapter<ChatVO> adapter = new ArrayAdapter<ChatVO>(getApplicationContext(),
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Intent intent = getIntent();
-        intentid = intent.getExtras().getString("name");
+       // Intent intent = getIntent();
+       // intentid = intent.getExtras().getString("name");
 
         Log.d("asdf", intentid);
         Log.d("aaaa", "test");

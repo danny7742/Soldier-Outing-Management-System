@@ -83,8 +83,6 @@ public class VacationFragment2 extends ListFragment { // 휴가인원 관리 레
         setListAdapter(adapter2) ;
 
         // listview에 들어가는 예시. 나중에 디비연동해야함
-        adapter2.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_child_care_black_18dp),
-                "강민수", "15-76089852") ;
 
 
 
